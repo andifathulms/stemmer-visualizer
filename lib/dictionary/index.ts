@@ -24,6 +24,18 @@ export const dictionaryEntrySchema = z.object({
   sumber: z.string().min(1),
 })
 
+/**
+ * An entry is either a bare word or a word with its own source.
+ *
+ * The bare form exists because a 30,000-word list from a single source would
+ * otherwise repeat that source 30,000 times — about a megabyte of JSON to say
+ * one thing. `sumberDefault` names it once and every bare entry inherits it,
+ * so every entry still has a known source and CLAUDE.md's provenance rule
+ * holds. A file with bare entries and no `sumberDefault` is rejected below,
+ * which is what keeps that true.
+ */
+export const dictionaryEntryInputSchema = z.union([z.string().min(1), dictionaryEntrySchema])
+
 export const dictionaryFileSchema = z.object({
   id: z.string().min(1),
   nama: z.string().min(1),
@@ -32,10 +44,22 @@ export const dictionaryFileSchema = z.object({
   cakupan: z.string().min(1),
   coverage: z.string().min(1),
   sources: z.record(dictionarySourceSchema),
+  /** Source for entries given as bare words. */
+  sumberDefault: z.string().min(1).optional(),
   // May be empty: the dictionary-free comparison in PRD §5.5 runs the engine
   // against nothing at all, and that is a legitimate dictionary.
-  entries: z.array(dictionaryEntrySchema),
+  entries: z.array(dictionaryEntryInputSchema),
 })
+  .superRefine((file, ctx) => {
+    if (file.sumberDefault !== undefined) return
+    if (!file.entries.some((entry) => typeof entry === 'string')) return
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['sumberDefault'],
+      message:
+        'bare word entries need `sumberDefault`: no dictionary entry may ship without a source',
+    })
+  })
 
 export type DictionaryEntry = z.infer<typeof dictionaryEntrySchema>
 export type DictionaryFile = z.infer<typeof dictionaryFileSchema>
@@ -90,7 +114,15 @@ export function createDictionary(file: DictionaryFile): Dictionary {
   const { entries, ...meta } = file
   return build(
     meta,
-    new Map(entries.map((entry) => [normalize(entry.kata), entry.sumber] as const)),
+    new Map(
+      entries.map((entry) =>
+        typeof entry === 'string'
+          ? // Guaranteed by the schema refinement above: bare entries only
+            // exist in a file that declares `sumberDefault`.
+            ([normalize(entry), meta.sumberDefault ?? 'tidak diketahui'] as const)
+          : ([normalize(entry.kata), entry.sumber] as const),
+      ),
+    ),
   )
 }
 
