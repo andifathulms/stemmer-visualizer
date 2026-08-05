@@ -76,7 +76,8 @@ export function Kata({
         <span key={`${morpheme.kind}-${index}-${morpheme.text}`}>
           {index > 0 && morpheme.text !== '' && (
             // The pencil slash a reader would draw between affix and root.
-            <span aria-hidden className="mx-0.5 text-pencil/70">
+            // A mark, not text — so it keeps the lighter pencil.
+            <span aria-hidden className="mx-0.5 text-pencilMark">
               /
             </span>
           )}
