@@ -50,7 +50,12 @@ export function SiteHeader({ locale, copy }: { locale: Locale; copy: Copy }) {
       <div className="mx-auto w-full max-w-5xl px-5 pt-4 sm:px-8">
         <div className="flex items-start justify-between gap-4">
           <Link href={`/${locale}/`} className="block">
-            <span className="font-word text-xl tracking-tight text-pen">kupas</span>
+            {/* The wordmark stays in the mono face — it is the face the words
+                under analysis are set in, which is the point. `kupas` survives
+                as the name of the trace section, where it is a good verb. */}
+            <span className="font-word text-lg tracking-tight text-pen sm:text-xl">
+              {copy.brandName}
+            </span>
             <span className="mt-0.5 hidden max-w-sm font-ui text-xs leading-snug text-pencil sm:block">
               {copy.brandTagline}
             </span>

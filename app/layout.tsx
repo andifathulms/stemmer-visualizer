@@ -31,7 +31,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Kupas — melihat kata Indonesia dipotong jadi kata dasar',
+  title: 'Stemmer Visualizer — melihat kata Indonesia dipotong jadi kata dasar',
   description:
     'Ketik satu kata Indonesia dan lihat imbuhannya dikupas satu per satu: aturan mana yang berlaku, kamus mana yang dicek, langkah mana yang dibatalkan — dan kata dasar lain yang sebenarnya juga mungkin.',
 }

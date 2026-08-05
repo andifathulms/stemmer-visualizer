@@ -36,6 +36,8 @@ export interface ExampleCopy {
 
 export interface Copy {
   readonly tagline: string
+  /** The product name. A proper noun, so it is the same in both locales. */
+  readonly brandName: string
   readonly brandTagline: string
 
   readonly nav: Record<SectionKey, string>
@@ -122,6 +124,7 @@ export interface Copy {
 const id: Copy = {
   tagline:
     'Algoritma Nazief & Adriani dibuka: setiap aturan yang berlaku, setiap pencarian kamus, setiap langkah yang dibatalkan — dan setiap kata dasar yang mungkin.',
+  brandName: 'Stemmer Visualizer',
   brandTagline: 'Membuka cara kata Indonesia dipotong jadi kata dasar',
 
   nav: {
@@ -145,7 +148,7 @@ const id: Copy = {
   hero: {
     eyebrow: 'Alat belajar · algoritma Nazief & Adriani',
     title: 'Lihat satu kata Indonesia dikupas sampai ke kata dasarnya.',
-    lead: 'Mesin pencari dan program pengolah bahasa memotong imbuhan lebih dulu, supaya “mempelajari”, “pelajaran”, dan “belajar” dikenali sebagai satu kata yang sama: ajar. Biasanya proses itu tertutup — kata masuk, hasil keluar. Kupas membukanya potongan demi potongan, termasuk ketika hasilnya keliru.',
+    lead: 'Mesin pencari dan program pengolah bahasa memotong imbuhan lebih dulu, supaya “mempelajari”, “pelajaran”, dan “belajar” dikenali sebagai satu kata yang sama: ajar. Biasanya proses itu tertutup — kata masuk, hasil keluar. Alat ini membukanya potongan demi potongan, termasuk ketika hasilnya keliru.',
     primary: 'Coba satu kata',
     secondary: 'Kenapa ini perlu dibuka',
   },
@@ -173,7 +176,7 @@ const id: Copy = {
       },
       {
         title: 'Sering ada lebih dari satu jawaban yang benar',
-        body: '“Beruang” bisa dibaca ber- + uang, bisa juga memang kata dasar beruang. Aturan sehalus apa pun tidak bisa memutuskannya. Algoritma memilih satu lalu diam; Kupas menampilkan semua kemungkinannya sekaligus.',
+        body: '“Beruang” bisa dibaca ber- + uang, bisa juga memang kata dasar beruang. Aturan sehalus apa pun tidak bisa memutuskannya. Algoritma memilih satu lalu diam; di sini semua kemungkinannya ditampilkan sekaligus.',
       },
     ],
   },
@@ -243,7 +246,7 @@ const id: Copy = {
   unverifiedRule: 'Aturan ini belum diperiksa terhadap makalah sumber.',
   honesty: {
     title: 'Alat ini bisa salah, dan itu memang bagian dari isinya',
-    body: 'Kupas menerapkan makalah yang diterbitkan, bukan menyalin pustaka yang sudah ada. Perbedaan hasil dengan Sastrawi memang ada, dicatat, dan diterbitkan apa adanya alih-alih ditutupi. Untuk dipakai di produksi, gunakan Sastrawi.',
+    body: 'Alat ini menerapkan makalah yang diterbitkan, bukan menyalin pustaka yang sudah ada. Perbedaan hasil dengan Sastrawi memang ada, dicatat, dan diterbitkan apa adanya alih-alih ditutupi. Untuk dipakai di produksi, gunakan Sastrawi.',
     link: 'Sastrawi — pustaka yang dipakai di produksi',
   },
 }
@@ -251,6 +254,7 @@ const id: Copy = {
 const en: Copy = {
   tagline:
     'The Nazief & Adriani stemmer opened up: every rule that fired, every dictionary lookup, every backtrack — and every root the word could plausibly have.',
+  brandName: 'Stemmer Visualizer',
   brandTagline: 'Opening up how Indonesian words are cut back to their roots',
 
   nav: {
@@ -274,7 +278,7 @@ const en: Copy = {
   hero: {
     eyebrow: 'A learning tool · the Nazief & Adriani algorithm',
     title: 'Watch an Indonesian word peeled back to its root.',
-    lead: 'Search engines and language software strip affixes first, so that “mempelajari”, “pelajaran” and “belajar” are all recognised as the same word: ajar. Normally that happens behind a closed door — word in, answer out. Kupas opens it one layer at a time, including the times it gets the answer wrong.',
+    lead: 'Search engines and language software strip affixes first, so that “mempelajari”, “pelajaran” and “belajar” are all recognised as the same word: ajar. Normally that happens behind a closed door — word in, answer out. This tool opens it one layer at a time, including the times it gets the answer wrong.',
     primary: 'Try a word',
     secondary: 'Why this needs opening',
   },
@@ -302,7 +306,7 @@ const en: Copy = {
       },
       {
         title: 'More than one answer is often correct',
-        body: '“Beruang” reads as ber- + uang, or as the root beruang. No amount of rule refinement settles it. The algorithm picks one and says nothing; Kupas shows you all of them at once.',
+        body: '“Beruang” reads as ber- + uang, or as the root beruang. No amount of rule refinement settles it. The algorithm picks one and says nothing; here they are all shown at once.',
       },
     ],
   },
@@ -372,7 +376,7 @@ const en: Copy = {
   unverifiedRule: 'This rule has not been checked against the source paper.',
   honesty: {
     title: 'This tool can be wrong, and that is part of what it is for',
-    body: 'Kupas implements the published papers rather than copying an existing library. Divergences from Sastrawi exist, are recorded, and are published rather than papered over. For production work, use Sastrawi.',
+    body: 'This tool implements the published papers rather than copying an existing library. Divergences from Sastrawi exist, are recorded, and are published rather than papered over. For production work, use Sastrawi.',
     link: 'Sastrawi — the production library',
   },
 }
