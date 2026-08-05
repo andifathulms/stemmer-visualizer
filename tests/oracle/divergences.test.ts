@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { interpret } from '@/lib/engine/interpret'
 import { enumerate } from '@/lib/engine/enumerate'
-import { dictionary, pack } from '../helpers'
+import { dictionary, pack, shipped } from '../helpers'
 
 /**
  * The classifications in `divergences.md`, made executable.
@@ -46,16 +46,58 @@ describe('beda-kamus — the dictionary decides, not the rules', () => {
   })
 })
 
-describe('ambigu — both answers defensible', () => {
-  it('mengupas: both roots are ours too, so this is a choice and not a gap', () => {
+describe('beda-kamus — mengupas, reclassified', () => {
+  // This was filed under `ambigu` on the claim that Sastrawi has both `upas`
+  // and `kupas` as roots. It does not. Sastrawi ships two lists and only
+  // `kata-dasar.original.txt` contains `upas`; the list the stemmer actually
+  // loads, `kata-dasar.txt`, has had it removed. Sastrawi cannot return `upas`
+  // for any input, so the two implementations were never choosing between
+  // readings — one of them only ever had one reading available.
+  it('the ambiguity is real against a dictionary that holds both roots', () => {
     expect(d.has('upas')).toBe(true)
     expect(d.has('kupas')).toBe(true)
-    // Sastrawi answers kupas; we answer upas; both are dictionary-valid in
-    // both systems. Unlike Sastrawi, we also say that a choice was made.
     expect(stem('mengupas')).toBe('upas')
+
     const trace = interpret({ word: 'mengupas', pack: p, dictionary: d })
     expect(trace.ambiguity?.alternatives.map((a) => a.kata).sort()).toEqual(['kupas', 'upas'])
     expect(trace.ambiguity?.reason).toBeTruthy()
+  })
+
+  it("Sastrawi's own list lacks upas, which is the whole divergence", () => {
+    // The proof of the reclassification: same rules, Sastrawi's dictionary,
+    // Sastrawi's answer. Nothing about aturan 17 had to change.
+    const sastrawi = shipped()
+    expect(sastrawi.has('upas')).toBe(false)
+    expect(sastrawi.has('kupas')).toBe(true)
+    expect(stem('mengupas', sastrawi)).toBe('kupas')
+  })
+})
+
+describe('what the app ships today', () => {
+  // The shipped dictionary is Sastrawi's root list, so these pin the answers a
+  // visitor actually gets. They are deliberately separate from the assertions
+  // above, which are pinned to the curated list the fixtures were recorded
+  // against — see tests/helpers.ts.
+  const sastrawi = shipped()
+
+  it('resolves berapa and menendang, which were dictionary gaps', () => {
+    expect(stem('berapa', sastrawi)).toBe('berapa')
+    expect(stem('menendang', sastrawi)).toBe('tendang')
+  })
+
+  it('over-stems perusakan to rusa — coverage is not correctness', () => {
+    // Agreement with Sastrawi bought by adopting its worse answer. Recorded so
+    // that nobody reads the agreement as a win. Invariant 11.
+    expect(stem('perusakan', sastrawi)).toBe('rusa')
+    expect(stem('perusakan')).toBe('rusak') // the curated list still gets it right
+  })
+
+  it('leaves the three rule-level divergences exactly where they were', () => {
+    // None of these move when the dictionary changes, which is positive
+    // evidence that they are about the rules and that the paper settles them.
+    expect(stem('terpercaya', sastrawi)).toBe('terpercaya')
+    expect(stem('bertemu', sastrawi)).toBe('bertemu')
+    expect(stem('menyanyi', sastrawi)).toBe('menyanyi')
   })
 })
 

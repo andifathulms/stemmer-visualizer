@@ -36,25 +36,55 @@ leads to `rusak`.
 
 **Ours is the better answer, and we did not earn it.** Add `rusa` to our dictionary and we return
 `rusa` too. The larger dictionary is the *worse* one here — a fact worth sitting with, since
-"improve coverage" is the usual reflex. `rusa` is deliberately not added: anyone can add it in the
-dictionary panel and watch `perusakan` break, which is exactly what that panel is for.
+"improve coverage" is the usual reflex.
+
+**And as of 2026-08-05 the app ships the larger dictionary, so the app now returns `rusa`.** This
+is the clearest cost of that change, and it was made with the cost known: growing the dictionary
+fixed far more words than it broke, but it did break this one, and `perusakan` is the proof that
+coverage and correctness are not the same axis. The curated list keeps the better answer, and the
+tests keep both — `divergences.test.ts` pins `rusak` against the curated dictionary and `rusa`
+against the shipped one.
 
 ### `berapa` — kupas `apa`, Sastrawi `berapa`
 
-`berapa` is a root and is in Sastrawi's dictionary, so it stops at the first lookup. It is missing
-from ours, so `berV` strips `ber-` and finds `apa`, which happens to be there. A dictionary gap
+`berapa` is a root and is in Sastrawi's dictionary, so it stops at the first lookup. It was missing
+from ours, so `berV` stripped `ber-` and found `apa`, which happens to be there. A dictionary gap
 wearing the costume of a rule success. Already in the failure gallery as `kelebihan-kupas`.
 
-## `ambigu` — both defensible
+**Resolved in the shipped dictionary as of 2026-08-05:** `berapa` is in Sastrawi's root list, so the
+app now agrees with Sastrawi here. It remains reproducible against the curated list, and the test
+pins both.
+
+## `beda-kamus`, on re-examination — `mengupas` was misclassified
 
 ### `mengupas` — kupas `upas`, Sastrawi `kupas`
 
-Not a dictionary difference: Sastrawi has **both** `upas` and `kupas` as roots, and so do we. Both
-implementations face the same two readings of `aturan 17` and pick different ones. Sastrawi prefers
-the reading that restores the `k`; we take the templates in the order the rule lists them.
+**This entry was wrong, and the dictionary work of 2026-08-05 corrected it.** It was filed under
+`ambigu` on the claim that *"Sastrawi has both `upas` and `kupas` as roots, and so do we"*, making
+this a coin-flip between two readings of `aturan 17`.
 
-Neither is wrong. This is the case the whole project exists for, and our answer differs from
-Sastrawi's only in which coin-flip it reports — except that we also report that a coin was flipped.
+Sastrawi ships two word lists, and the distinction matters:
+
+| | `upas` | `kupas` |
+|---|---|---|
+| `kata-dasar.txt` — the list the stemmer actually uses | **absent** | present |
+| `kata-dasar.original.txt` — the uncurated list, not loaded at runtime | present | present |
+
+`upas` was deliberately removed from the active list. Sastrawi therefore **cannot** return `upas`
+for any input: the branch does not die on a rule, it dies on a lookup. Whoever wrote the original
+entry checked `kata-dasar.original.txt`.
+
+So this is `beda-kamus`, not `ambigu`, and it is proven the same way the others are: run our rules
+against Sastrawi's active list and we return `kupas` too. Our rules never disagreed.
+
+The ambiguity itself is still real — `mengupas` genuinely admits both readings, and against the
+curated 293-word list (which does contain `upas`) we still report both and pick the first. What is
+no longer true is that Sastrawi is choosing between them. It only ever had one.
+
+**The lesson is about method, not about this word.** A divergence was classified as a rule-level
+disagreement on the strength of a dictionary lookup performed against the wrong file. It survived
+review because the conclusion was plausible and flattering — "both defensible" is a comfortable
+place to stop. The oracle is only as good as the care taken over what it is actually comparing.
 
 ## `belum-jelas` — not yet understood, and not to be guessed at
 
@@ -99,3 +129,27 @@ once the paper confirms it. Already in the gallery as `kekurangan-kupas`.
 the algorithm, one is real ambiguity, and three point at specific transcription questions. That is
 a better result than agreement would have been — a differential oracle that finds nothing has
 usually just confirmed that both sides copied the same secondary source.
+
+## Revision, 2026-08-05 — after adopting Sastrawi's root list
+
+The app's shipped dictionary changed from the 293-word curated list to Sastrawi's ~30,000-word
+`kata-dasar.txt`. That is a change to one input, not to a single rule, and it moved four of the 316
+recorded words. The count above is unchanged because it describes the run against the curated list,
+which the test suite still pins.
+
+| Word | Curated | Shipped | Sastrawi | What it means |
+|---|---|---|---|---|
+| `menendang` | *fails* | `tendang` | — | Pure dictionary gap. The rules were always right. |
+| `mengupas` | `upas` | `kupas` | `kupas` | Reclassified `ambigu` → `beda-kamus`; see above. |
+| `berapa` | `apa` | `berapa` | `berapa` | Divergence resolved; it was a gap. |
+| `perusakan` | `rusak` | `rusa` | `rusa` | Agreement bought at the price of a worse answer. |
+
+**Three of the six divergences were dictionary artefacts, and only three were ever about the rules.**
+The three that survive — `terpercaya`, `bertemu`, `menyanyi` — do not move when the dictionary
+changes, which is now positive evidence that they are rule-level and that the paper is what settles
+them. That sharpens the priority list in `GAPS.md` rather than changing it.
+
+The uncomfortable half: agreeing with Sastrawi on `perusakan` and `mengupas` is not evidence that we
+became more correct. On `perusakan` we adopted its over-stemming. Invariant 11 says Sastrawi is an
+oracle and not an authority, and the temptation this run exposes is subtler than editing a rule — it
+is picking the *input* that produces agreement and calling the agreement a result.

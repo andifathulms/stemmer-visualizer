@@ -20,7 +20,7 @@ Read `PRD.md` before starting any task. It fixes scope; this file describes how 
 - Zod for rule-pack and dictionary schema validation
 - Vitest
 - pnpm
-- No stemming library. Sastrawi appears only in a development script that records oracle fixtures — never as a runtime dependency, never imported by `lib/`.
+- No stemming library. Sastrawi appears only in two development scripts — one records oracle fixtures, one imports its MIT-licensed root list — never as a runtime dependency, never imported by `lib/`. The root list is *data*, vendored with its licence in `data/dictionary/`; no Sastrawi code ships.
 
 ## Commands
 
@@ -35,11 +35,12 @@ pnpm test:oracle            # differential comparison against recorded Sastrawi 
 pnpm test:properties        # idempotence, enumeration soundness, dictionary independence
 pnpm rules:validate         # schema, citations, precedence conflicts
 pnpm fixtures:record        # DEV ONLY — runs Sastrawi to regenerate oracle fixtures
+pnpm dictionary:import      # DEV ONLY — regenerates the root list from a local PySastrawi
 pnpm typecheck
 pnpm lint
 ```
 
-`pnpm fixtures:record` is a development-only script. It never runs in CI and never ships in the browser bundle.
+`pnpm fixtures:record` and `pnpm dictionary:import` are development-only. Neither runs in CI, and neither ships in the browser bundle.
 
 ## Layout
 
@@ -69,7 +70,8 @@ lib/
   dictionary/               # loader, lookup interface
 data/
   rules/                    # rule packs: 1996 base, 2005 extensions
-  dictionary/               # root words + per-source provenance
+  dictionary/               # base.json     — 293 hand-curated; what the tests pin to
+                            # sastrawi.json — ~30k, MIT; what the app ships, as its own chunk
 tests/
   papers/                   # cited worked examples
   oracle/                   # recorded Sastrawi pairs + divergence classifications
@@ -117,7 +119,7 @@ tests/
 - **When a differential test disagrees, investigate before choosing a side.** Write the classification down in `tests/oracle/` regardless of the outcome. That record is a genuine contribution.
 - **Build the failure gallery early, not last.** A tool that only demonstrates the algorithm succeeding teaches false confidence in it.
 - **Small increments.** Suffix removal fully verified beats suffix plus prefix both half-done.
-- **Don't touch `next.config.js`, the Actions workflow, the validator, or `fixtures:record` without saying so explicitly.**
+- **Don't touch `next.config.js`, the Actions workflow, the validator, `fixtures:record` or `dictionary:import` without saying so explicitly.**
 - **Don't add a stemming, morphology, or NLP dependency.**
 - **Never weaken a test or the validator to make something pass.**
 
@@ -165,6 +167,14 @@ M0–M4 and M6 are in. M5 is partial.
 | M6 | Reference + gallery | Done. Rule reference, six-entry failure gallery, document mode. |
 
 The peeling animation is in, and the differential oracle has been run and classified.
+
+**The dictionary changed on 2026-08-05.** The app ships Sastrawi's ~30,000-word root list; the
+293-word curated list is still in the repo and is what the whole test suite pins to, because every
+paper fixture and recorded divergence was authored against it (`tests/helpers.ts` explains this at
+length). Do not repoint `dictionary()` at the shipped list to make something pass. The change also
+reclassified one oracle divergence and resolved two others — read the revision section at the end of
+`tests/oracle/divergences.md` before touching a rule, because three of the six recorded divergences
+turned out to be dictionary artefacts and only three are about the rules.
 
 **The one thing to know before touching anything:** every rule in `data/rules/na96.json` is
 `verification: "unverified"`. The pack was written from the widely-reproduced form of the rule

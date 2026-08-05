@@ -1,59 +1,85 @@
 import { describe, expect, it } from 'vitest'
 import { interpret } from '@/lib/engine/interpret'
-import { parseRulePack } from '@/lib/rules/loader'
-import { loadBaseDictionary } from '@/lib/dictionary/base'
 import { jelaskanKegagalan } from '@/lib/app/kegagalan'
-import na96 from '@/data/rules/na96.json'
+import { dictionary, pack, shipped } from '../helpers'
 
 /**
- * `menendang` is the permanent fixture for dictionary-caused failure, the way
- * `beruang` is the permanent fixture for ambiguity.
+ * Dictionary-caused failure, pinned the way `beruang` pins ambiguity.
  *
- * It matters because the algorithm gets it *right* and the answer is thrown
- * away: `me-` comes off and the peluruhan restores the `t` that assimilated
- * into `n-`, producing `tendang`, which is simply not in the dictionary. Any
- * change that makes this look like a rule failure has broken the thing this
- * project exists to show (PRD §2).
+ * The thing being protected is a distinction the UI now makes in prose: when a
+ * word comes back unstemmed, the rules usually worked and the *dictionary* came
+ * up short. If that ever stops being true, KegagalanNote's copy becomes a lie
+ * and these tests are how we find out.
+ *
+ * Two dictionaries, because the claim is about both:
+ *
+ *   - against the curated 293-word list, `menendang` is the canonical
+ *     demonstration — the algorithm restores the `t` that assimilated into
+ *     `n-`, reaches `tendang`, and throws it away;
+ *   - against the ~30,000-word list the app actually ships, `menendang` now
+ *     resolves, and `mendownload` takes over as the case that still fails.
+ *     A loanword is the honest example there: no 2016 root list contains it,
+ *     and the algorithm still gets to `download` correctly.
  */
-const pack = parseRulePack(na96)
+const p = pack()
 
 describe('jelaskanKegagalan', () => {
-  it('names the forms the algorithm reached and the dictionary rejected', () => {
-    const dictionary = loadBaseDictionary()
-    const trace = interpret({ word: 'menendang', pack, dictionary })
+  describe('against the curated dictionary', () => {
+    const d = dictionary()
 
-    expect(trace.found).toBe(false)
+    it('names the forms the algorithm reached and the dictionary rejected', () => {
+      const trace = interpret({ word: 'menendang', pack: p, dictionary: d })
 
-    const kegagalan = jelaskanKegagalan(trace)
-    expect(kegagalan).not.toBeNull()
-    // The correct root is among the forms it tried and discarded.
-    expect(kegagalan?.dicoba).toContain('tendang')
-    expect(kegagalan?.terakhir).toBe('tendang')
+      expect(trace.found).toBe(false)
+
+      const kegagalan = jelaskanKegagalan(trace)
+      expect(kegagalan).not.toBeNull()
+      // The correct root is among the forms it tried and discarded.
+      expect(kegagalan?.dicoba).toContain('tendang')
+      expect(kegagalan?.terakhir).toBe('tendang')
+    })
+
+    it('is the dictionary, not the rules: adding the root fixes the answer', () => {
+      // The same rule pack, one word added. If this ever fails, the failure is
+      // in the rules after all and KegagalanNote's copy is wrong.
+      const trace = interpret({ word: 'menendang', pack: p, dictionary: d.with('tendang', 'uji') })
+
+      expect(trace.found).toBe(true)
+      expect(trace.result).toBe('tendang')
+      expect(jelaskanKegagalan(trace)).toBeNull()
+    })
+
+    it('never offers the input word itself as something to add', () => {
+      const trace = interpret({ word: 'menendang', pack: p, dictionary: d })
+
+      expect(jelaskanKegagalan(trace)?.dicoba).not.toContain('menendang')
+    })
+
+    it('explains nothing when the word stemmed successfully', () => {
+      const trace = interpret({ word: 'menulis', pack: p, dictionary: d })
+
+      expect(trace.result).toBe('tulis')
+      expect(jelaskanKegagalan(trace)).toBeNull()
+    })
   })
 
-  it('is the dictionary, not the rules: adding the root fixes the answer', () => {
-    // The same rule pack, one word added. If this ever fails, the failure is
-    // in the rules after all and the copy in KegagalanNote is a lie.
-    const dictionary = loadBaseDictionary().with('tendang', 'test')
-    const trace = interpret({ word: 'menendang', pack, dictionary })
+  describe('against the shipped dictionary', () => {
+    const d = shipped()
 
-    expect(trace.found).toBe(true)
-    expect(trace.result).toBe('tendang')
-    expect(jelaskanKegagalan(trace)).toBeNull()
-  })
+    it('resolves menendang, which the curated list could not', () => {
+      // The reason the shipped dictionary was grown in the first place.
+      const trace = interpret({ word: 'menendang', pack: p, dictionary: d })
 
-  it('never offers the input word itself as something to add', () => {
-    const dictionary = loadBaseDictionary()
-    const trace = interpret({ word: 'menendang', pack, dictionary })
+      expect(trace.result).toBe('tendang')
+      expect(jelaskanKegagalan(trace)).toBeNull()
+    })
 
-    expect(jelaskanKegagalan(trace)?.dicoba).not.toContain('menendang')
-  })
+    it('still explains a genuine miss, because 30,000 roots is not every root', () => {
+      const trace = interpret({ word: 'mendownload', pack: p, dictionary: d })
 
-  it('explains nothing when the word stemmed successfully', () => {
-    const dictionary = loadBaseDictionary()
-    const trace = interpret({ word: 'menulis', pack, dictionary })
-
-    expect(trace.result).toBe('tulis')
-    expect(jelaskanKegagalan(trace)).toBeNull()
+      expect(trace.found).toBe(false)
+      // The rules did their job: men- came off and `download` was reached.
+      expect(jelaskanKegagalan(trace)?.terakhir).toBe('download')
+    })
   })
 })
