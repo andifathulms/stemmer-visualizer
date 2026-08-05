@@ -19,6 +19,22 @@ unverified rule costs the most:
    and the reading of "P ≠ er" is an interpretation.
 3. The forbidden prefix-suffix table.
 
+## Source availability — checked 2026-08-05
+
+Verification is blocked on getting the papers, and getting them is harder than it looks. What was
+tried, so nobody repeats it:
+
+| Source | State |
+|---|---|
+| Nazief & Adriani (1996), UI tech report | No open copy found. It is a faculty technical report, not a conference paper, and may only exist in print or on a UI server that no longer serves it. |
+| Asian, Williams & Tahaghoghi (2005), ACSC — CRPIT vol. 38, pp. 307–314 | The canonical CRPIT link that DBLP records, `crpit.scem.westernsydney.edu.au/abstracts/CRPITV38Asian.html`, **no longer resolves at all** (DNS failure). CRPIT is nominally open access, so a working mirror probably exists somewhere. |
+| Adriani, Asian, Nazief, Tahaghoghi & Williams (2007), *Stemming Indonesian: A confix-stripping approach*, ACM TALIP 6(4), [10.1145/1316457.1316459](https://doi.org/10.1145/1316457.1316459) | Paywalled (ACM DL). **This is the extended journal version of the 2005 paper and is the best target** — it is the most complete published statement of the rule table, and the one to cite once checked. |
+
+Practical routes: ACM DL through an institution, an author's personal or institutional page, or an
+inter-library request. Do **not** verify against a secondary paper that reproduces the table — those
+reproductions are themselves the widely-copied form this pack was written from, so checking one
+against the other proves nothing.
+
 ## Rules deliberately left out
 
 | Rule | Why it is not here |

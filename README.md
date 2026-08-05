@@ -49,7 +49,14 @@ animation. See the current-state table in `CLAUDE.md`.
 - Nazief, B. & Adriani, M. (1996). *Confix-Stripping: Approach to Stemming Algorithm for Bahasa
   Indonesia.* Fakultas Ilmu Komputer, Universitas Indonesia.
 - Asian, J., Williams, H. E. & Tahaghoghi, S. M. M. (2005). *Stemming Indonesian.* Proceedings of
-  the 28th Australasian Computer Science Conference.
+  the 28th Australasian Computer Science Conference, CRPIT vol. 38, pp. 307–314.
+- Adriani, M., Asian, J., Nazief, B., Tahaghoghi, S. M. M. & Williams, H. E. (2007). *Stemming
+  Indonesian: A confix-stripping approach.* ACM TALIP 6(4).
+  [doi:10.1145/1316457.1316459](https://doi.org/10.1145/1316457.1316459) — the extended journal
+  version of the 2005 paper, and the most complete published statement of the rule table.
+
+None of the three is openly available as of August 2026; see the source-availability table in
+`data/rules/GAPS.md` before going looking.
 
 ## Development
 

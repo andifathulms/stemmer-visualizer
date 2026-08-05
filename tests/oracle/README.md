@@ -32,3 +32,12 @@ For each divergence, write an entry in `divergences.md` with:
 4. The reasoning. This record is itself a contribution — PRD §7.
 
 Never auto-align to Sastrawi to make a test pass, and never assume Sastrawi is right by default.
+
+## A possible second oracle
+
+[Snowball ships an Indonesian stemmer](https://snowballstem.org/algorithms/indonesian/stemmer.html)
+that also derives from this algorithm. Two independent implementations disagreeing with each other
+tells you more than one implementation disagreeing with us: where Sastrawi and Snowball agree and we
+differ, we are the likely bug; where all three differ, the paper is probably ambiguous and that is
+worth writing down. It is a second oracle, not a second authority — the same rules apply to it.
+
