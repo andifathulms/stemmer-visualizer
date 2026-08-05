@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-paper text-pen font-prose antialiased;
+  }
+
+  ::selection {
+    background-color: #e8c34a55;
+  }
+}
+
+@layer components {
+  /* A ruled line of the exercise book. Steps sit on the ruling, not between it. */
+  .baris {
+    @apply border-b border-ruleLine/70;
+  }
+
+  /* An abandoned working-out: struck through, still readable — PRD §8. */
+  .dicoret {
+    @apply text-pencil line-through decoration-pencil/80;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
