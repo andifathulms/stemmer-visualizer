@@ -14,9 +14,12 @@ time. Until a rule is checked, treat its citation as an address, not as evidence
 Priority for checking, highest first — recoding is where implementations diverge, so it is where an
 unverified rule costs the most:
 
-1. `na96.awalan.me.recode.*` and `na96.awalan.pe.recode.*` — the peluruhan rules.
-2. The `C`/`P` side conditions on the ber-/ter-/pe- rules; these are transcribed as regex lookaheads
-   and the reading of "P ≠ er" is an interpretation.
+1. **The `C`/`P` side conditions on the ber-/ter-/pe- rules.** Promoted to first by the oracle run:
+   `terpercaya` suggests our reading of "P ≠ er" as *P must not begin with `er`* is simply wrong,
+   and a misread condition of that shape is probably repeated across the other rules that carry one.
+   See `tests/oracle/divergences.md`.
+2. `na96.awalan.me.recode.*` and `na96.awalan.pe.recode.*` — the peluruhan rules. `aturan 18` is
+   the specific question: the oracle suggests it may admit a `nyV` reading we dropped.
 3. The forbidden prefix-suffix table.
 
 ## Source availability — checked 2026-08-05
@@ -40,6 +43,7 @@ against the other proves nothing.
 | Rule | Why it is not here |
 |---|---|
 | `berCAerV` variants beyond `aturan 3` | Could not construct a real Indonesian example that exercises the pattern; shipping a rule with an invented example would make the fixture worthless. |
+| ~~`perCAP` (`aturan 22`)~~ | **Added 2026-08-05.** Its absence was found by the Sastrawi oracle — `perdaya` was being propped up by a bogus dictionary entry. `perdaya` → `daya`, `pertemuan` → `temu`. |
 | `mem{rV}` (`aturan 13`, second half) | The `me-mrV` / `me-prV` readings could not be exemplified. |
 | `peCerV → per-erV` (`aturan 32`) | The published form of this rule is unclear to us and we will not guess at it. |
 | Infixes (*sisipan*) `-el-`, `-em-`, `-er-` | Not handled by the 1996 algorithm as commonly implemented. If added, they belong in their own pack, not smuggled into this one. |
@@ -51,3 +55,6 @@ against the other proves nothing.
 - **`terpercaya` under-stems.** `aturan 8` excludes `P = er`, and `aturan 7` requires a vowel after
   `er`, so no ter- rule fires and the word is returned unchanged. This is a genuine consequence of
   the rules as transcribed, and it ships as a failure-gallery entry rather than being patched away.
+  The oracle run since suggests the transcription itself is the fault — see the priority list above.
+- **`menyanyi` under-stems**, because `aturan 18` as transcribed gives `meny-` only the assimilated
+  `s` reading. Sastrawi reaches `nyanyi`; ours cannot, though the root is in the dictionary.

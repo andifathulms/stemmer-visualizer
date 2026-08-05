@@ -26,11 +26,21 @@
       "akhiran": "-lah",
       "keterangan": "Partikel -lah, imbuhan infleksional. Dibuang paling awal.",
       "match": "^(.{2,})lah$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 10,
-      "citation": { "source": "nazief1996", "locus": "langkah 2 — partikel" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 2 — partikel"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "duduklah", "output": "duduk" }]
+      "examples": [
+        {
+          "input": "duduklah",
+          "output": "duduk"
+        }
+      ]
     },
     {
       "type": "partikel",
@@ -38,11 +48,21 @@
       "akhiran": "-kah",
       "keterangan": "Partikel -kah, imbuhan infleksional.",
       "match": "^(.{2,})kah$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 10,
-      "citation": { "source": "nazief1996", "locus": "langkah 2 — partikel" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 2 — partikel"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "bukukah", "output": "buku" }]
+      "examples": [
+        {
+          "input": "bukukah",
+          "output": "buku"
+        }
+      ]
     },
     {
       "type": "partikel",
@@ -50,11 +70,21 @@
       "akhiran": "-tah",
       "keterangan": "Partikel -tah, imbuhan infleksional. Jarang dipakai dalam bahasa modern.",
       "match": "^(.{2,})tah$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 10,
-      "citation": { "source": "nazief1996", "locus": "langkah 2 — partikel" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 2 — partikel"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "apatah", "output": "apa" }]
+      "examples": [
+        {
+          "input": "apatah",
+          "output": "apa"
+        }
+      ]
     },
     {
       "type": "milik",
@@ -62,11 +92,21 @@
       "akhiran": "-ku",
       "keterangan": "Kata ganti milik -ku. Dibuang setelah partikel.",
       "match": "^(.{2,})ku$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 20,
-      "citation": { "source": "nazief1996", "locus": "langkah 2 — kata ganti milik" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 2 — kata ganti milik"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "bukuku", "output": "buku" }]
+      "examples": [
+        {
+          "input": "bukuku",
+          "output": "buku"
+        }
+      ]
     },
     {
       "type": "milik",
@@ -74,11 +114,21 @@
       "akhiran": "-mu",
       "keterangan": "Kata ganti milik -mu.",
       "match": "^(.{2,})mu$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 20,
-      "citation": { "source": "nazief1996", "locus": "langkah 2 — kata ganti milik" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 2 — kata ganti milik"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "bukumu", "output": "buku" }]
+      "examples": [
+        {
+          "input": "bukumu",
+          "output": "buku"
+        }
+      ]
     },
     {
       "type": "milik",
@@ -86,11 +136,21 @@
       "akhiran": "-nya",
       "keterangan": "Kata ganti milik -nya.",
       "match": "^(.{2,})nya$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 20,
-      "citation": { "source": "nazief1996", "locus": "langkah 2 — kata ganti milik" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 2 — kata ganti milik"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "bukunya", "output": "buku" }]
+      "examples": [
+        {
+          "input": "bukunya",
+          "output": "buku"
+        }
+      ]
     },
     {
       "type": "akhiran",
@@ -98,11 +158,21 @@
       "akhiran": "-kan",
       "keterangan": "Akhiran derivasional -kan. Diperiksa sebelum -an, karena membuang -an lebih dahulu akan menyisakan huruf k.",
       "match": "^(.{2,})kan$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 30,
-      "citation": { "source": "nazief1996", "locus": "langkah 3 — akhiran derivasional" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 3 — akhiran derivasional"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "hitungkan", "output": "hitung" }]
+      "examples": [
+        {
+          "input": "hitungkan",
+          "output": "hitung"
+        }
+      ]
     },
     {
       "type": "akhiran",
@@ -110,11 +180,21 @@
       "akhiran": "-an",
       "keterangan": "Akhiran derivasional -an.",
       "match": "^(.{2,})an$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 40,
-      "citation": { "source": "nazief1996", "locus": "langkah 3 — akhiran derivasional" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 3 — akhiran derivasional"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "makanan", "output": "makan" }]
+      "examples": [
+        {
+          "input": "makanan",
+          "output": "makan"
+        }
+      ]
     },
     {
       "type": "akhiran",
@@ -122,13 +202,22 @@
       "akhiran": "-i",
       "keterangan": "Akhiran derivasional -i.",
       "match": "^(.{2,})i$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 50,
-      "citation": { "source": "nazief1996", "locus": "langkah 3 — akhiran derivasional" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 3 — akhiran derivasional"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "tanami", "output": "tanam" }]
+      "examples": [
+        {
+          "input": "tanami",
+          "output": "tanam"
+        }
+      ]
     },
-
     {
       "type": "awalan",
       "id": "na96.awalan.di",
@@ -137,11 +226,21 @@
       "peluruhan": false,
       "keterangan": "Awalan di-. Pembuangan langsung, tanpa peluruhan.",
       "match": "^di(.{2,})$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 100,
-      "citation": { "source": "nazief1996", "locus": "langkah 4 — awalan sederhana" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 4 — awalan sederhana"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "dibaca", "output": "baca" }]
+      "examples": [
+        {
+          "input": "dibaca",
+          "output": "baca"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -151,11 +250,21 @@
       "peluruhan": false,
       "keterangan": "Awalan ke-. Pembuangan langsung.",
       "match": "^ke(.{2,})$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 101,
-      "citation": { "source": "nazief1996", "locus": "langkah 4 — awalan sederhana" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 4 — awalan sederhana"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "ketua", "output": "tua" }]
+      "examples": [
+        {
+          "input": "ketua",
+          "output": "tua"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -165,13 +274,22 @@
       "peluruhan": false,
       "keterangan": "Awalan se-. Pembuangan langsung.",
       "match": "^se(.{2,})$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 102,
-      "citation": { "source": "nazief1996", "locus": "langkah 4 — awalan sederhana" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "langkah 4 — awalan sederhana"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "sebuah", "output": "buah" }]
+      "examples": [
+        {
+          "input": "sebuah",
+          "output": "buah"
+        }
+      ]
     },
-
     {
       "type": "awalan",
       "id": "na96.awalan.be.berv",
@@ -180,13 +298,26 @@
       "peluruhan": false,
       "keterangan": "berV… → ber-V… atau be-rV…. Dua bacaan: huruf r bisa milik awalan, bisa milik kata dasar. Inilah sumber keambiguan beruang.",
       "match": "^ber([aiueo].*)$",
-      "produces": ["$1", "r$1"],
+      "produces": [
+        "$1",
+        "r$1"
+      ],
       "precedence": 110,
-      "citation": { "source": "asian2005", "locus": "aturan 1" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 1"
+      },
       "verification": "unverified",
       "examples": [
-        { "input": "beruang", "output": "uang", "note": "bacaan lain: ruang; kata dasar beruang juga ada di kamus" },
-        { "input": "beruang", "output": "ruang" }
+        {
+          "input": "beruang",
+          "output": "uang",
+          "note": "bacaan lain: ruang; kata dasar beruang juga ada di kamus"
+        },
+        {
+          "input": "beruang",
+          "output": "ruang"
+        }
       ]
     },
     {
@@ -197,11 +328,21 @@
       "peluruhan": false,
       "keterangan": "berCAP… → ber-CAP…, dengan C bukan r dan P bukan er.",
       "match": "^ber(?![a-z][a-z]er)([^aiueor].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 111,
-      "citation": { "source": "asian2005", "locus": "aturan 2" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 2"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "bertemu", "output": "temu" }]
+      "examples": [
+        {
+          "input": "bertemu",
+          "output": "temu"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -211,11 +352,21 @@
       "peluruhan": false,
       "keterangan": "berCAerV… → ber-CAerV…, dengan C bukan r.",
       "match": "^ber([^aiueor][a-z]er[aiueo].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 112,
-      "citation": { "source": "asian2005", "locus": "aturan 3" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 3"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "berdaerah", "output": "daerah" }]
+      "examples": [
+        {
+          "input": "berdaerah",
+          "output": "daerah"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -225,11 +376,21 @@
       "peluruhan": false,
       "keterangan": "belajar → bel-ajar. Aturan khusus untuk satu kata; bel- bukan awalan produktif.",
       "match": "^bel(ajar.*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 113,
-      "citation": { "source": "asian2005", "locus": "aturan 4" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 4"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "belajar", "output": "ajar" }]
+      "examples": [
+        {
+          "input": "belajar",
+          "output": "ajar"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -239,13 +400,22 @@
       "peluruhan": false,
       "keterangan": "beC1erC2… → be-C1erC2…, dengan C1 bukan r dan bukan l.",
       "match": "^be([^aiueorl]er[^aiueo].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 114,
-      "citation": { "source": "asian2005", "locus": "aturan 5" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 5"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "bekerja", "output": "kerja" }]
+      "examples": [
+        {
+          "input": "bekerja",
+          "output": "kerja"
+        }
+      ]
     },
-
     {
       "type": "awalan",
       "id": "na96.awalan.te.terv",
@@ -254,13 +424,25 @@
       "peluruhan": false,
       "keterangan": "terV… → ter-V… atau te-rV…. Dua bacaan, seperti ber-.",
       "match": "^ter([aiueo].*)$",
-      "produces": ["$1", "r$1"],
+      "produces": [
+        "$1",
+        "r$1"
+      ],
       "precedence": 120,
-      "citation": { "source": "asian2005", "locus": "aturan 6" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 6"
+      },
       "verification": "unverified",
       "examples": [
-        { "input": "terangkat", "output": "angkat" },
-        { "input": "terasa", "output": "rasa" }
+        {
+          "input": "terangkat",
+          "output": "angkat"
+        },
+        {
+          "input": "terasa",
+          "output": "rasa"
+        }
       ]
     },
     {
@@ -271,11 +453,21 @@
       "peluruhan": false,
       "keterangan": "terCerV… → ter-CerV…, dengan C bukan r.",
       "match": "^ter([^aiueor]er[aiueo].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 121,
-      "citation": { "source": "asian2005", "locus": "aturan 7" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 7"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "terperiksa", "output": "periksa" }]
+      "examples": [
+        {
+          "input": "terperiksa",
+          "output": "periksa"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -285,11 +477,21 @@
       "peluruhan": false,
       "keterangan": "terCP… → ter-CP…, dengan C bukan r dan P bukan er.",
       "match": "^ter(?![a-z]er)([^aiueor].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 122,
-      "citation": { "source": "asian2005", "locus": "aturan 8" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 8"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "tertutup", "output": "tutup" }]
+      "examples": [
+        {
+          "input": "tertutup",
+          "output": "tutup"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -299,13 +501,23 @@
       "peluruhan": false,
       "keterangan": "teC1erC2… → te-C1erC2…, dengan C1 bukan r.",
       "match": "^te([^aiueor]er[^aiueo].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 123,
-      "citation": { "source": "asian2005", "locus": "aturan 9" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 9"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "teperdaya", "output": "perdaya", "note": "bentuk yang jarang; dicatat apa adanya" }]
+      "examples": [
+        {
+          "input": "teperdaya",
+          "output": "perdaya",
+          "note": "bentuk yang jarang; dicatat apa adanya"
+        }
+      ]
     },
-
     {
       "type": "awalan",
       "id": "na96.awalan.me.melrwy",
@@ -314,11 +526,21 @@
       "peluruhan": false,
       "keterangan": "me{l|r|w|y}V… → me-{l|r|w|y}V…. Tanpa peluruhan.",
       "match": "^me([lrwy][aiueo].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 130,
-      "citation": { "source": "asian2005", "locus": "aturan 10" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 10"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "melihat", "output": "lihat" }]
+      "examples": [
+        {
+          "input": "melihat",
+          "output": "lihat"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -328,11 +550,21 @@
       "peluruhan": false,
       "keterangan": "mem{b|f|v}… → mem-{b|f|v}…. Huruf awal kata dasar tetap utuh.",
       "match": "^mem([bfv].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 131,
-      "citation": { "source": "asian2005", "locus": "aturan 11" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 11"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "membaca", "output": "baca" }]
+      "examples": [
+        {
+          "input": "membaca",
+          "output": "baca"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -342,11 +574,21 @@
       "peluruhan": false,
       "keterangan": "mempe… → mem-pe…. Kata dasar masih berawalan pe-, jadi iterasi berikutnya yang menanganinya.",
       "match": "^mem(pe.*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 132,
-      "citation": { "source": "asian2005", "locus": "aturan 12" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 12"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "mempelajari", "output": "pelajari" }]
+      "examples": [
+        {
+          "input": "mempelajari",
+          "output": "pelajari"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -356,13 +598,26 @@
       "peluruhan": true,
       "keterangan": "memV… → me-mV… atau me-pV…. Peluruhan: huruf p luluh menjadi m. Dua bacaan, dan kamus yang memutuskan.",
       "match": "^mem([aiueo].*)$",
-      "produces": ["m$1", "p$1"],
+      "produces": [
+        "m$1",
+        "p$1"
+      ],
       "precedence": 133,
-      "citation": { "source": "asian2005", "locus": "aturan 13" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 13"
+      },
       "verification": "unverified",
       "examples": [
-        { "input": "memukul", "output": "pukul", "note": "p luluh menjadi m" },
-        { "input": "memukul", "output": "mukul" }
+        {
+          "input": "memukul",
+          "output": "pukul",
+          "note": "p luluh menjadi m"
+        },
+        {
+          "input": "memukul",
+          "output": "mukul"
+        }
       ]
     },
     {
@@ -373,11 +628,21 @@
       "peluruhan": false,
       "keterangan": "men{c|d|j|z}… → men-{c|d|j|z}….",
       "match": "^men([cdjz].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 134,
-      "citation": { "source": "asian2005", "locus": "aturan 14" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 14"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "mencari", "output": "cari" }]
+      "examples": [
+        {
+          "input": "mencari",
+          "output": "cari"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -387,13 +652,26 @@
       "peluruhan": true,
       "keterangan": "menV… → me-nV… atau me-tV…. Peluruhan: huruf t luluh menjadi n.",
       "match": "^men([aiueo].*)$",
-      "produces": ["n$1", "t$1"],
+      "produces": [
+        "n$1",
+        "t$1"
+      ],
       "precedence": 135,
-      "citation": { "source": "asian2005", "locus": "aturan 15" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 15"
+      },
       "verification": "unverified",
       "examples": [
-        { "input": "menulis", "output": "tulis", "note": "t luluh menjadi n" },
-        { "input": "menulis", "output": "nulis" }
+        {
+          "input": "menulis",
+          "output": "tulis",
+          "note": "t luluh menjadi n"
+        },
+        {
+          "input": "menulis",
+          "output": "nulis"
+        }
       ]
     },
     {
@@ -404,11 +682,21 @@
       "peluruhan": false,
       "keterangan": "meng{g|h|q|k}… → meng-{g|h|q|k}…. Huruf awal tetap utuh.",
       "match": "^meng([ghqk].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 136,
-      "citation": { "source": "asian2005", "locus": "aturan 16" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 16"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "menghitung", "output": "hitung" }]
+      "examples": [
+        {
+          "input": "menghitung",
+          "output": "hitung"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -418,13 +706,26 @@
       "peluruhan": true,
       "keterangan": "mengV… → meng-V… atau meng-kV…. Peluruhan: huruf k luluh. Mengupas sendiri punya dua bacaan — upas dan kupas.",
       "match": "^meng([aiueo].*)$",
-      "produces": ["$1", "k$1"],
+      "produces": [
+        "$1",
+        "k$1"
+      ],
       "precedence": 137,
-      "citation": { "source": "asian2005", "locus": "aturan 17" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 17"
+      },
       "verification": "unverified",
       "examples": [
-        { "input": "mengupas", "output": "kupas", "note": "k luluh" },
-        { "input": "mengambil", "output": "ambil" }
+        {
+          "input": "mengupas",
+          "output": "kupas",
+          "note": "k luluh"
+        },
+        {
+          "input": "mengambil",
+          "output": "ambil"
+        }
       ]
     },
     {
@@ -435,11 +736,22 @@
       "peluruhan": true,
       "keterangan": "menyV… → meny-sV…. Peluruhan: huruf s luluh menjadi ny. Hanya satu bacaan.",
       "match": "^meny([aiueo].*)$",
-      "produces": ["s$1"],
+      "produces": [
+        "s$1"
+      ],
       "precedence": 138,
-      "citation": { "source": "asian2005", "locus": "aturan 18" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 18"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "menyapu", "output": "sapu", "note": "s luluh menjadi ny" }]
+      "examples": [
+        {
+          "input": "menyapu",
+          "output": "sapu",
+          "note": "s luluh menjadi ny"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -449,13 +761,22 @@
       "peluruhan": false,
       "keterangan": "mempV… → mem-pV…, dengan V bukan e. Huruf p tidak luluh di sini.",
       "match": "^mem(p[aiou].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 139,
-      "citation": { "source": "asian2005", "locus": "aturan 19" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 19"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "mempunyai", "output": "punyai" }]
+      "examples": [
+        {
+          "input": "mempunyai",
+          "output": "punyai"
+        }
+      ]
     },
-
     {
       "type": "awalan",
       "id": "na96.awalan.pe.pewy",
@@ -464,11 +785,21 @@
       "peluruhan": false,
       "keterangan": "pe{w|y}V… → pe-{w|y}V….",
       "match": "^pe([wy][aiueo].*)$",
-      "produces": ["$1"],
+      "produces": [
+        "$1"
+      ],
       "precedence": 150,
-      "citation": { "source": "asian2005", "locus": "aturan 20" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 20"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "pewaris", "output": "waris" }]
+      "examples": [
+        {
+          "input": "pewaris",
+          "output": "waris"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -478,13 +809,54 @@
       "peluruhan": false,
       "keterangan": "perV… → per-V… atau pe-rV…. Dua bacaan.",
       "match": "^per([aiueo].*)$",
-      "produces": ["$1", "r$1"],
+      "produces": [
+        "$1",
+        "r$1"
+      ],
       "precedence": 151,
-      "citation": { "source": "asian2005", "locus": "aturan 21" },
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 21"
+      },
       "verification": "unverified",
       "examples": [
-        { "input": "perusak", "output": "rusak" },
-        { "input": "perasa", "output": "asa" }
+        {
+          "input": "perusak",
+          "output": "rusak"
+        },
+        {
+          "input": "perasa",
+          "output": "asa"
+        }
+      ]
+    },
+    {
+      "type": "awalan",
+      "id": "na96.awalan.pe.percap",
+      "awalan": "per-",
+      "jenis": "pe",
+      "peluruhan": false,
+      "keterangan": "perCAP… → per-CAP…, dengan C bukan r dan P bukan er. Sejajar dengan aturan 2 untuk ber-.",
+      "match": "^per(?![a-z][a-z]er)([^aiueor].*)$",
+      "produces": [
+        "$1"
+      ],
+      "precedence": 152,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 22"
+      },
+      "verification": "unverified",
+      "examples": [
+        {
+          "input": "perdaya",
+          "output": "daya",
+          "note": "aturan ini semula tidak ada; ketiadaannya ditemukan oleh perbandingan dengan Sastrawi"
+        },
+        {
+          "input": "pertemuan",
+          "output": "temuan"
+        }
       ]
     },
     {
@@ -495,11 +867,21 @@
       "peluruhan": false,
       "keterangan": "pelajar → pel-ajar. Pengecualian, sepasang dengan belajar.",
       "match": "^pel(ajar.*)$",
-      "produces": ["$1"],
-      "precedence": 152,
-      "citation": { "source": "asian2005", "locus": "aturan 31, pengecualian" },
+      "produces": [
+        "$1"
+      ],
+      "precedence": 153,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 31, pengecualian"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "pelajar", "output": "ajar" }]
+      "examples": [
+        {
+          "input": "pelajar",
+          "output": "ajar"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -509,11 +891,21 @@
       "peluruhan": false,
       "keterangan": "pelV… → pe-lV…, kecuali pelajar.",
       "match": "^pe(l[aiueo].*)$",
-      "produces": ["$1"],
-      "precedence": 153,
-      "citation": { "source": "asian2005", "locus": "aturan 31" },
+      "produces": [
+        "$1"
+      ],
+      "precedence": 154,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 31"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "pelari", "output": "lari" }]
+      "examples": [
+        {
+          "input": "pelari",
+          "output": "lari"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -523,11 +915,21 @@
       "peluruhan": false,
       "keterangan": "pem{b|f|v}… → pem-{b|f|v}….",
       "match": "^pem([bfv].*)$",
-      "produces": ["$1"],
-      "precedence": 154,
-      "citation": { "source": "asian2005", "locus": "aturan 24" },
+      "produces": [
+        "$1"
+      ],
+      "precedence": 155,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 24"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "pembaca", "output": "baca" }]
+      "examples": [
+        {
+          "input": "pembaca",
+          "output": "baca"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -537,11 +939,22 @@
       "peluruhan": true,
       "keterangan": "pemV… → pe-mV… atau pe-pV…. Peluruhan p menjadi m, sejajar dengan mem-.",
       "match": "^pem([aiueo].*)$",
-      "produces": ["m$1", "p$1"],
-      "precedence": 155,
-      "citation": { "source": "asian2005", "locus": "aturan 25" },
+      "produces": [
+        "m$1",
+        "p$1"
+      ],
+      "precedence": 156,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 25"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "pemukul", "output": "pukul" }]
+      "examples": [
+        {
+          "input": "pemukul",
+          "output": "pukul"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -551,11 +964,21 @@
       "peluruhan": false,
       "keterangan": "pen{c|d|j|z}… → pen-{c|d|j|z}….",
       "match": "^pen([cdjz].*)$",
-      "produces": ["$1"],
-      "precedence": 156,
-      "citation": { "source": "asian2005", "locus": "aturan 26" },
+      "produces": [
+        "$1"
+      ],
+      "precedence": 157,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 26"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "pencari", "output": "cari" }]
+      "examples": [
+        {
+          "input": "pencari",
+          "output": "cari"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -565,11 +988,22 @@
       "peluruhan": true,
       "keterangan": "penV… → pe-nV… atau pe-tV…. Peluruhan t menjadi n.",
       "match": "^pen([aiueo].*)$",
-      "produces": ["n$1", "t$1"],
-      "precedence": 157,
-      "citation": { "source": "asian2005", "locus": "aturan 27" },
+      "produces": [
+        "n$1",
+        "t$1"
+      ],
+      "precedence": 158,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 27"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "penulis", "output": "tulis" }]
+      "examples": [
+        {
+          "input": "penulis",
+          "output": "tulis"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -579,11 +1013,21 @@
       "peluruhan": false,
       "keterangan": "peng{g|h|q|k}… → peng-{g|h|q|k}….",
       "match": "^peng([ghqk].*)$",
-      "produces": ["$1"],
-      "precedence": 158,
-      "citation": { "source": "asian2005", "locus": "aturan 28" },
+      "produces": [
+        "$1"
+      ],
+      "precedence": 159,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 28"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "penggali", "output": "gali" }]
+      "examples": [
+        {
+          "input": "penggali",
+          "output": "gali"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -593,13 +1037,25 @@
       "peluruhan": true,
       "keterangan": "pengV… → peng-V… atau peng-kV…. Peluruhan k.",
       "match": "^peng([aiueo].*)$",
-      "produces": ["$1", "k$1"],
-      "precedence": 159,
-      "citation": { "source": "asian2005", "locus": "aturan 29" },
+      "produces": [
+        "$1",
+        "k$1"
+      ],
+      "precedence": 160,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 29"
+      },
       "verification": "unverified",
       "examples": [
-        { "input": "pengupas", "output": "kupas" },
-        { "input": "pengambil", "output": "ambil" }
+        {
+          "input": "pengupas",
+          "output": "kupas"
+        },
+        {
+          "input": "pengambil",
+          "output": "ambil"
+        }
       ]
     },
     {
@@ -610,11 +1066,21 @@
       "peluruhan": true,
       "keterangan": "penyV… → peny-sV…. Peluruhan s menjadi ny.",
       "match": "^peny([aiueo].*)$",
-      "produces": ["s$1"],
-      "precedence": 160,
-      "citation": { "source": "asian2005", "locus": "aturan 30" },
+      "produces": [
+        "s$1"
+      ],
+      "precedence": 161,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 30"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "penyapu", "output": "sapu" }]
+      "examples": [
+        {
+          "input": "penyapu",
+          "output": "sapu"
+        }
+      ]
     },
     {
       "type": "awalan",
@@ -624,54 +1090,96 @@
       "peluruhan": false,
       "keterangan": "peCP… → pe-CP…, dengan C bukan r, w, y, l, m, n dan P bukan er.",
       "match": "^pe(?![a-z]er)([^aiueorwylmn].*)$",
-      "produces": ["$1"],
-      "precedence": 161,
-      "citation": { "source": "asian2005", "locus": "aturan 33" },
+      "produces": [
+        "$1"
+      ],
+      "precedence": 162,
+      "citation": {
+        "source": "asian2005",
+        "locus": "aturan 33"
+      },
       "verification": "unverified",
-      "examples": [{ "input": "pesuruh", "output": "suruh" }]
+      "examples": [
+        {
+          "input": "pesuruh",
+          "output": "suruh"
+        }
+      ]
     }
   ],
   "forbidden": [
     {
       "jenis": "be",
-      "akhiran": ["-i"],
+      "akhiran": [
+        "-i"
+      ],
       "keterangan": "Awalan be- tidak berpasangan dengan akhiran -i.",
-      "citation": { "source": "nazief1996", "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan"
+      },
       "verification": "unverified"
     },
     {
       "jenis": "di",
-      "akhiran": ["-an"],
+      "akhiran": [
+        "-an"
+      ],
       "keterangan": "Awalan di- tidak berpasangan dengan akhiran -an.",
-      "citation": { "source": "nazief1996", "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan"
+      },
       "verification": "unverified"
     },
     {
       "jenis": "ke",
-      "akhiran": ["-i", "-kan"],
+      "akhiran": [
+        "-i",
+        "-kan"
+      ],
       "keterangan": "Awalan ke- tidak berpasangan dengan akhiran -i atau -kan.",
-      "citation": { "source": "nazief1996", "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan"
+      },
       "verification": "unverified"
     },
     {
       "jenis": "me",
-      "akhiran": ["-an"],
+      "akhiran": [
+        "-an"
+      ],
       "keterangan": "Awalan me- tidak berpasangan dengan akhiran -an.",
-      "citation": { "source": "nazief1996", "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan"
+      },
       "verification": "unverified"
     },
     {
       "jenis": "se",
-      "akhiran": ["-i", "-kan"],
+      "akhiran": [
+        "-i",
+        "-kan"
+      ],
       "keterangan": "Awalan se- tidak berpasangan dengan akhiran -i atau -kan.",
-      "citation": { "source": "nazief1996", "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan"
+      },
       "verification": "unverified"
     },
     {
       "jenis": "te",
-      "akhiran": ["-an"],
+      "akhiran": [
+        "-an"
+      ],
       "keterangan": "Awalan te- tidak berpasangan dengan akhiran -an.",
-      "citation": { "source": "nazief1996", "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan" },
+      "citation": {
+        "source": "nazief1996",
+        "locus": "tabel kombinasi awalan-akhiran yang tidak diizinkan"
+      },
       "verification": "unverified"
     }
   ]

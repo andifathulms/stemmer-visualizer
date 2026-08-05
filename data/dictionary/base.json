@@ -12,299 +12,1177 @@
     }
   },
   "entries": [
-    { "kata": "abai", "sumber": "kupas-manual" },
-    { "kata": "acu", "sumber": "kupas-manual" },
-    { "kata": "adil", "sumber": "kupas-manual" },
-    { "kata": "ajar", "sumber": "kupas-manual" },
-    { "kata": "aku", "sumber": "kupas-manual" },
-    { "kata": "alam", "sumber": "kupas-manual" },
-    { "kata": "alir", "sumber": "kupas-manual" },
-    { "kata": "amat", "sumber": "kupas-manual" },
-    { "kata": "ambil", "sumber": "kupas-manual" },
-    { "kata": "aman", "sumber": "kupas-manual" },
-    { "kata": "anak", "sumber": "kupas-manual" },
-    { "kata": "ancam", "sumber": "kupas-manual" },
-    { "kata": "angkat", "sumber": "kupas-manual" },
-    { "kata": "angin", "sumber": "kupas-manual" },
-    { "kata": "antar", "sumber": "kupas-manual" },
-    { "kata": "apa", "sumber": "kupas-manual" },
-    { "kata": "api", "sumber": "kupas-manual" },
-    { "kata": "arah", "sumber": "kupas-manual" },
-    { "kata": "asa", "sumber": "kupas-manual" },
-    { "kata": "asah", "sumber": "kupas-manual" },
-    { "kata": "asal", "sumber": "kupas-manual" },
-    { "kata": "asing", "sumber": "kupas-manual" },
-    { "kata": "atur", "sumber": "kupas-manual" },
-    { "kata": "awal", "sumber": "kupas-manual" },
-    { "kata": "ayah", "sumber": "kupas-manual" },
-    { "kata": "baca", "sumber": "kupas-manual" },
-    { "kata": "bagi", "sumber": "kupas-manual" },
-    { "kata": "bahas", "sumber": "kupas-manual" },
-    { "kata": "baik", "sumber": "kupas-manual" },
-    { "kata": "balas", "sumber": "kupas-manual" },
-    { "kata": "bangun", "sumber": "kupas-manual" },
-    { "kata": "bantu", "sumber": "kupas-manual" },
-    { "kata": "banyak", "sumber": "kupas-manual" },
-    { "kata": "batas", "sumber": "kupas-manual" },
-    { "kata": "bawa", "sumber": "kupas-manual" },
-    { "kata": "bayar", "sumber": "kupas-manual" },
-    { "kata": "beda", "sumber": "kupas-manual" },
-    { "kata": "beli", "sumber": "kupas-manual" },
-    { "kata": "benar", "sumber": "kupas-manual" },
-    { "kata": "bentuk", "sumber": "kupas-manual" },
-    { "kata": "beri", "sumber": "kupas-manual" },
-    { "kata": "berat", "sumber": "kupas-manual" },
-    { "kata": "beruang", "sumber": "kupas-manual" },
-    { "kata": "besar", "sumber": "kupas-manual" },
-    { "kata": "bicara", "sumber": "kupas-manual" },
-    { "kata": "bilang", "sumber": "kupas-manual" },
-    { "kata": "buah", "sumber": "kupas-manual" },
-    { "kata": "buang", "sumber": "kupas-manual" },
-    { "kata": "buat", "sumber": "kupas-manual" },
-    { "kata": "buka", "sumber": "kupas-manual" },
-    { "kata": "buku", "sumber": "kupas-manual" },
-    { "kata": "bumi", "sumber": "kupas-manual" },
-    { "kata": "bunga", "sumber": "kupas-manual" },
-    { "kata": "buru", "sumber": "kupas-manual" },
-    { "kata": "cabang", "sumber": "kupas-manual" },
-    { "kata": "cahaya", "sumber": "kupas-manual" },
-    { "kata": "cakap", "sumber": "kupas-manual" },
-    { "kata": "campur", "sumber": "kupas-manual" },
-    { "kata": "cari", "sumber": "kupas-manual" },
-    { "kata": "cepat", "sumber": "kupas-manual" },
-    { "kata": "cerita", "sumber": "kupas-manual" },
-    { "kata": "cinta", "sumber": "kupas-manual" },
-    { "kata": "coba", "sumber": "kupas-manual" },
-    { "kata": "cukup", "sumber": "kupas-manual" },
-    { "kata": "curi", "sumber": "kupas-manual" },
-    { "kata": "daerah", "sumber": "kupas-manual" },
-    { "kata": "daftar", "sumber": "kupas-manual" },
-    { "kata": "dapat", "sumber": "kupas-manual" },
-    { "kata": "darat", "sumber": "kupas-manual" },
-    { "kata": "dasar", "sumber": "kupas-manual" },
-    { "kata": "datang", "sumber": "kupas-manual" },
-    { "kata": "dengar", "sumber": "kupas-manual" },
-    { "kata": "depan", "sumber": "kupas-manual" },
-    { "kata": "derita", "sumber": "kupas-manual" },
-    { "kata": "diam", "sumber": "kupas-manual" },
-    { "kata": "didik", "sumber": "kupas-manual" },
-    { "kata": "diri", "sumber": "kupas-manual" },
-    { "kata": "duduk", "sumber": "kupas-manual" },
-    { "kata": "duga", "sumber": "kupas-manual" },
-    { "kata": "dukung", "sumber": "kupas-manual" },
-    { "kata": "empat", "sumber": "kupas-manual" },
-    { "kata": "gabung", "sumber": "kupas-manual" },
-    { "kata": "gagal", "sumber": "kupas-manual" },
-    { "kata": "gali", "sumber": "kupas-manual" },
-    { "kata": "ganti", "sumber": "kupas-manual" },
-    { "kata": "garis", "sumber": "kupas-manual" },
-    { "kata": "gambar", "sumber": "kupas-manual" },
-    { "kata": "gerak", "sumber": "kupas-manual" },
-    { "kata": "guna", "sumber": "kupas-manual" },
-    { "kata": "guru", "sumber": "kupas-manual" },
-    { "kata": "habis", "sumber": "kupas-manual" },
-    { "kata": "hadap", "sumber": "kupas-manual" },
-    { "kata": "hakim", "sumber": "kupas-manual" },
-    { "kata": "hangat", "sumber": "kupas-manual" },
-    { "kata": "hapus", "sumber": "kupas-manual" },
-    { "kata": "harap", "sumber": "kupas-manual" },
-    { "kata": "hargai", "sumber": "kupas-manual" },
-    { "kata": "harga", "sumber": "kupas-manual" },
-    { "kata": "hari", "sumber": "kupas-manual" },
-    { "kata": "hasil", "sumber": "kupas-manual" },
-    { "kata": "hati", "sumber": "kupas-manual" },
-    { "kata": "hidup", "sumber": "kupas-manual" },
-    { "kata": "hilang", "sumber": "kupas-manual" },
-    { "kata": "hitung", "sumber": "kupas-manual" },
-    { "kata": "hubung", "sumber": "kupas-manual" },
-    { "kata": "hujan", "sumber": "kupas-manual" },
-    { "kata": "hukum", "sumber": "kupas-manual" },
-    { "kata": "ibu", "sumber": "kupas-manual" },
-    { "kata": "ikat", "sumber": "kupas-manual" },
-    { "kata": "ikut", "sumber": "kupas-manual" },
-    { "kata": "ilmu", "sumber": "kupas-manual" },
-    { "kata": "indah", "sumber": "kupas-manual" },
-    { "kata": "ingat", "sumber": "kupas-manual" },
-    { "kata": "ingin", "sumber": "kupas-manual" },
-    { "kata": "isi", "sumber": "kupas-manual" },
-    { "kata": "jadi", "sumber": "kupas-manual" },
-    { "kata": "jaga", "sumber": "kupas-manual" },
-    { "kata": "jalan", "sumber": "kupas-manual" },
-    { "kata": "jauh", "sumber": "kupas-manual" },
-    { "kata": "jawab", "sumber": "kupas-manual" },
-    { "kata": "jual", "sumber": "kupas-manual" },
-    { "kata": "juang", "sumber": "kupas-manual" },
-    { "kata": "kaki", "sumber": "kupas-manual" },
-    { "kata": "kali", "sumber": "kupas-manual" },
-    { "kata": "kata", "sumber": "kupas-manual" },
-    { "kata": "kawan", "sumber": "kupas-manual" },
-    { "kata": "kecil", "sumber": "kupas-manual" },
-    { "kata": "kejar", "sumber": "kupas-manual" },
-    { "kata": "kenal", "sumber": "kupas-manual" },
-    { "kata": "kerja", "sumber": "kupas-manual" },
-    { "kata": "kertas", "sumber": "kupas-manual" },
-    { "kata": "kirim", "sumber": "kupas-manual" },
-    { "kata": "kota", "sumber": "kupas-manual" },
-    { "kata": "kuasa", "sumber": "kupas-manual" },
-    { "kata": "kuat", "sumber": "kupas-manual" },
-    { "kata": "kumpul", "sumber": "kupas-manual" },
-    { "kata": "kunci", "sumber": "kupas-manual" },
-    { "kata": "kupas", "sumber": "kupas-manual" },
-    { "kata": "kurang", "sumber": "kupas-manual" },
-    { "kata": "lagu", "sumber": "kupas-manual" },
-    { "kata": "lain", "sumber": "kupas-manual" },
-    { "kata": "lama", "sumber": "kupas-manual" },
-    { "kata": "langkah", "sumber": "kupas-manual" },
-    { "kata": "lanjut", "sumber": "kupas-manual" },
-    { "kata": "lapor", "sumber": "kupas-manual" },
-    { "kata": "lari", "sumber": "kupas-manual" },
-    { "kata": "latih", "sumber": "kupas-manual" },
-    { "kata": "laut", "sumber": "kupas-manual" },
-    { "kata": "lawan", "sumber": "kupas-manual" },
-    { "kata": "lembut", "sumber": "kupas-manual" },
-    { "kata": "lengkap", "sumber": "kupas-manual" },
-    { "kata": "lihat", "sumber": "kupas-manual" },
-    { "kata": "lompat", "sumber": "kupas-manual" },
-    { "kata": "luas", "sumber": "kupas-manual" },
-    { "kata": "lupa", "sumber": "kupas-manual" },
-    { "kata": "lurus", "sumber": "kupas-manual" },
-    { "kata": "main", "sumber": "kupas-manual" },
-    { "kata": "makan", "sumber": "kupas-manual" },
-    { "kata": "malam", "sumber": "kupas-manual" },
-    { "kata": "mampu", "sumber": "kupas-manual" },
-    { "kata": "masak", "sumber": "kupas-manual" },
-    { "kata": "masuk", "sumber": "kupas-manual" },
-    { "kata": "mata", "sumber": "kupas-manual" },
-    { "kata": "milik", "sumber": "kupas-manual" },
-    { "kata": "minta", "sumber": "kupas-manual" },
-    { "kata": "minum", "sumber": "kupas-manual" },
-    { "kata": "muda", "sumber": "kupas-manual" },
-    { "kata": "mudah", "sumber": "kupas-manual" },
-    { "kata": "mulai", "sumber": "kupas-manual" },
-    { "kata": "muncul", "sumber": "kupas-manual" },
-    { "kata": "murah", "sumber": "kupas-manual" },
-    { "kata": "musim", "sumber": "kupas-manual" },
-    { "kata": "naik", "sumber": "kupas-manual" },
-    { "kata": "nama", "sumber": "kupas-manual" },
-    { "kata": "negara", "sumber": "kupas-manual" },
-    { "kata": "nilai", "sumber": "kupas-manual" },
-    { "kata": "nyala", "sumber": "kupas-manual" },
-    { "kata": "nyanyi", "sumber": "kupas-manual" },
-    { "kata": "nyata", "sumber": "kupas-manual" },
-    { "kata": "obat", "sumber": "kupas-manual" },
-    { "kata": "olah", "sumber": "kupas-manual" },
-    { "kata": "orang", "sumber": "kupas-manual" },
-    { "kata": "pagi", "sumber": "kupas-manual" },
-    { "kata": "paham", "sumber": "kupas-manual" },
-    { "kata": "pakai", "sumber": "kupas-manual" },
-    { "kata": "panas", "sumber": "kupas-manual" },
-    { "kata": "panjang", "sumber": "kupas-manual" },
-    { "kata": "pandang", "sumber": "kupas-manual" },
-    { "kata": "pantai", "sumber": "kupas-manual" },
-    { "kata": "pasar", "sumber": "kupas-manual" },
-    { "kata": "pasti", "sumber": "kupas-manual" },
-    { "kata": "pecah", "sumber": "kupas-manual" },
-    { "kata": "pendek", "sumber": "kupas-manual" },
-    { "kata": "penuh", "sumber": "kupas-manual" },
-    { "kata": "percaya", "sumber": "kupas-manual" },
-    { "kata": "perdaya", "sumber": "kupas-manual" },
-    { "kata": "periksa", "sumber": "kupas-manual" },
-    { "kata": "pikir", "sumber": "kupas-manual" },
-    { "kata": "pilih", "sumber": "kupas-manual" },
-    { "kata": "pindah", "sumber": "kupas-manual" },
-    { "kata": "pinjam", "sumber": "kupas-manual" },
-    { "kata": "pintu", "sumber": "kupas-manual" },
-    { "kata": "potong", "sumber": "kupas-manual" },
-    { "kata": "pukul", "sumber": "kupas-manual" },
-    { "kata": "punya", "sumber": "kupas-manual" },
-    { "kata": "putus", "sumber": "kupas-manual" },
-    { "kata": "raih", "sumber": "kupas-manual" },
-    { "kata": "rakyat", "sumber": "kupas-manual" },
-    { "kata": "ramah", "sumber": "kupas-manual" },
-    { "kata": "rasa", "sumber": "kupas-manual" },
-    { "kata": "ratus", "sumber": "kupas-manual" },
-    { "kata": "rawat", "sumber": "kupas-manual" },
-    { "kata": "rendah", "sumber": "kupas-manual" },
-    { "kata": "ribu", "sumber": "kupas-manual" },
-    { "kata": "ringan", "sumber": "kupas-manual" },
-    { "kata": "rumah", "sumber": "kupas-manual" },
-    { "kata": "ruang", "sumber": "kupas-manual" },
-    { "kata": "rusak", "sumber": "kupas-manual" },
-    { "kata": "sabar", "sumber": "kupas-manual" },
-    { "kata": "sakit", "sumber": "kupas-manual" },
-    { "kata": "salah", "sumber": "kupas-manual" },
-    { "kata": "sampai", "sumber": "kupas-manual" },
-    { "kata": "sapu", "sumber": "kupas-manual" },
-    { "kata": "satu", "sumber": "kupas-manual" },
-    { "kata": "sayang", "sumber": "kupas-manual" },
-    { "kata": "sedia", "sumber": "kupas-manual" },
-    { "kata": "sehat", "sumber": "kupas-manual" },
-    { "kata": "sekolah", "sumber": "kupas-manual" },
-    { "kata": "selamat", "sumber": "kupas-manual" },
-    { "kata": "selesai", "sumber": "kupas-manual" },
-    { "kata": "sempat", "sumber": "kupas-manual" },
-    { "kata": "sempit", "sumber": "kupas-manual" },
-    { "kata": "senang", "sumber": "kupas-manual" },
-    { "kata": "serah", "sumber": "kupas-manual" },
-    { "kata": "sertai", "sumber": "kupas-manual" },
-    { "kata": "siap", "sumber": "kupas-manual" },
-    { "kata": "simpan", "sumber": "kupas-manual" },
-    { "kata": "sulit", "sumber": "kupas-manual" },
-    { "kata": "sungai", "sumber": "kupas-manual" },
-    { "kata": "suruh", "sumber": "kupas-manual" },
-    { "kata": "susun", "sumber": "kupas-manual" },
-    { "kata": "tahan", "sumber": "kupas-manual" },
-    { "kata": "tahu", "sumber": "kupas-manual" },
-    { "kata": "tajam", "sumber": "kupas-manual" },
-    { "kata": "takut", "sumber": "kupas-manual" },
-    { "kata": "tambah", "sumber": "kupas-manual" },
-    { "kata": "tanam", "sumber": "kupas-manual" },
-    { "kata": "tangan", "sumber": "kupas-manual" },
-    { "kata": "tangkap", "sumber": "kupas-manual" },
-    { "kata": "tanya", "sumber": "kupas-manual" },
-    { "kata": "tarik", "sumber": "kupas-manual" },
-    { "kata": "tawar", "sumber": "kupas-manual" },
-    { "kata": "tebal", "sumber": "kupas-manual" },
-    { "kata": "tekan", "sumber": "kupas-manual" },
-    { "kata": "telur", "sumber": "kupas-manual" },
-    { "kata": "teman", "sumber": "kupas-manual" },
-    { "kata": "temu", "sumber": "kupas-manual" },
-    { "kata": "tentu", "sumber": "kupas-manual" },
-    { "kata": "terang", "sumber": "kupas-manual" },
-    { "kata": "terima", "sumber": "kupas-manual" },
-    { "kata": "tetap", "sumber": "kupas-manual" },
-    { "kata": "tidur", "sumber": "kupas-manual" },
-    { "kata": "tinggal", "sumber": "kupas-manual" },
-    { "kata": "tinggi", "sumber": "kupas-manual" },
-    { "kata": "titik", "sumber": "kupas-manual" },
-    { "kata": "tolak", "sumber": "kupas-manual" },
-    { "kata": "tolong", "sumber": "kupas-manual" },
-    { "kata": "tua", "sumber": "kupas-manual" },
-    { "kata": "tugas", "sumber": "kupas-manual" },
-    { "kata": "tulis", "sumber": "kupas-manual" },
-    { "kata": "tumbuh", "sumber": "kupas-manual" },
-    { "kata": "tunggu", "sumber": "kupas-manual" },
-    { "kata": "turun", "sumber": "kupas-manual" },
-    { "kata": "tutup", "sumber": "kupas-manual" },
-    { "kata": "uang", "sumber": "kupas-manual" },
-    { "kata": "ubah", "sumber": "kupas-manual" },
-    { "kata": "ucap", "sumber": "kupas-manual" },
-    { "kata": "ujar", "sumber": "kupas-manual" },
-    { "kata": "ujung", "sumber": "kupas-manual" },
-    { "kata": "ukur", "sumber": "kupas-manual" },
-    { "kata": "ulang", "sumber": "kupas-manual" },
-    { "kata": "umum", "sumber": "kupas-manual" },
-    { "kata": "undang", "sumber": "kupas-manual" },
-    { "kata": "unsur", "sumber": "kupas-manual" },
-    { "kata": "untung", "sumber": "kupas-manual" },
-    { "kata": "upas", "sumber": "kupas-manual" },
-    { "kata": "urus", "sumber": "kupas-manual" },
-    { "kata": "usaha", "sumber": "kupas-manual" },
-    { "kata": "utama", "sumber": "kupas-manual" },
-    { "kata": "waktu", "sumber": "kupas-manual" },
-    { "kata": "waris", "sumber": "kupas-manual" },
-    { "kata": "warna", "sumber": "kupas-manual" },
-    { "kata": "wujud", "sumber": "kupas-manual" },
-    { "kata": "yakin", "sumber": "kupas-manual" }
+    {
+      "kata": "abai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "acu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "adil",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ajar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "aku",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "alam",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "alir",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "aman",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "amat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ambil",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "anak",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ancam",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "angin",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "angkat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "antar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "apa",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "api",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "arah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "asa",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "asah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "asal",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "asing",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "atur",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "awal",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ayah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "baca",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bagi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bahas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "baik",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "balas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bangun",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bantu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "banyak",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "batas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bawa",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bayar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "beda",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "beli",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "benar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bentuk",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "berat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "beri",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "beruang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "besar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bicara",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bilang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "buah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "buang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "buat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "buka",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "buku",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bumi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "bunga",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "buru",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cabang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cahaya",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cakap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "campur",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cari",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cepat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cerita",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cinta",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "coba",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "cukup",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "curi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "daerah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "daftar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "dapat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "darat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "dasar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "datang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "daya",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "dengar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "depan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "derita",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "diam",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "didik",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "diri",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "duduk",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "duga",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "dukung",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "empat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "gabung",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "gagal",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "gali",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "gambar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ganti",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "garis",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "gerak",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "guna",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "guru",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "habis",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hadap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hakim",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hangat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hapus",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "harap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "harga",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hari",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hasil",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hati",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hidup",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hilang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hitung",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hubung",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hujan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "hukum",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ibu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ikat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ikut",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ilmu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "indah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ingat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ingin",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "isi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "jadi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "jaga",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "jalan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "jauh",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "jawab",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "jual",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "juang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kaki",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kali",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kata",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kawan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kecil",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kejar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kenal",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kerja",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kertas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kirim",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kota",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kuasa",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kuat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kumpul",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kunci",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kupas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "kurang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lagu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lain",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lama",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "langkah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lanjut",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lapor",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lari",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "latih",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "laut",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lawan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lembut",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lengkap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lihat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lompat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "luas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lupa",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "lurus",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "main",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "makan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "malam",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "mampu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "masak",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "masuk",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "mata",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "milik",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "minta",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "minum",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "muda",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "mudah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "mulai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "muncul",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "murah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "musim",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "naik",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "nama",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "negara",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "nilai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "nyala",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "nyanyi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "nyata",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "obat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "olah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "orang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pagi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "paham",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pakai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "panas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pandang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "panjang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pantai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pasar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pasti",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pecah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pendek",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "penuh",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "percaya",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "periksa",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pikir",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pilih",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pindah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pinjam",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pintu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "potong",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "pukul",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "punya",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "putus",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "raih",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "rakyat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ramah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "rasa",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ratus",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "rawat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "rendah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ribu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ringan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ruang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "rumah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "rusak",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sabar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sakit",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "salah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sampai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sapu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "satu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sayang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sedia",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sehat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sekolah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "selamat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "selesai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sempat",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sempit",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "senang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "serah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "serta",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "siap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "simpan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sulit",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "sungai",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "suruh",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "susun",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tahan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tahu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tajam",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "takut",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tambah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tanam",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tangan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tangkap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tanya",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tarik",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tawar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tebal",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tekan",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "telur",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "teman",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "temu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tentu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "terang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "terima",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tetap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tidur",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tinggal",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tinggi",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "titik",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tolak",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tolong",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tua",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tugas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tulis",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tumbuh",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tunggu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "turun",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "tutup",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "uang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ubah",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ucap",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ujar",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ujung",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ukur",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "ulang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "umum",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "undang",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "unsur",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "untung",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "upas",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "urus",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "usaha",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "utama",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "waktu",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "waris",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "warna",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "wujud",
+      "sumber": "kupas-manual"
+    },
+    {
+      "kata": "yakin",
+      "sumber": "kupas-manual"
+    }
   ]
 }

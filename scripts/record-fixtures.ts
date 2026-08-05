@@ -19,16 +19,30 @@ if (process.env.CI) {
 
 const OUT = join(process.cwd(), 'tests', 'oracle', 'fixtures.json')
 
-/** Word list to compare on: the dictionary plus the paper fixtures' inputs. */
+/**
+ * Word list to compare on: the paper fixtures, the gallery, and the whole
+ * dictionary.
+ *
+ * The gallery belongs here and was missing at first. Those are the words
+ * already known to be hard, so they are exactly the ones an oracle has
+ * something to say about — leaving them out meant comparing hardest on the
+ * words least likely to disagree.
+ */
 function words(): string[] {
-  const dict = JSON.parse(
-    readFileSync(join(process.cwd(), 'data', 'dictionary', 'base.json'), 'utf8'),
-  ) as { entries: { kata: string }[] }
-  const papers = JSON.parse(
-    readFileSync(join(process.cwd(), 'tests', 'papers', 'fixtures.json'), 'utf8'),
-  ) as { cases: { kata: string }[] }
+  const read = (...path: string[]): unknown =>
+    JSON.parse(readFileSync(join(process.cwd(), ...path), 'utf8'))
 
-  return [...new Set([...papers.cases.map((c) => c.kata), ...dict.entries.map((e) => e.kata)])]
+  const dict = read('data', 'dictionary', 'base.json') as { entries: { kata: string }[] }
+  const papers = read('tests', 'papers', 'fixtures.json') as { cases: { kata: string }[] }
+  const gallery = read('data', 'galeri.json') as { entries: { kata: string }[] }
+
+  return [
+    ...new Set([
+      ...papers.cases.map((c) => c.kata),
+      ...gallery.entries.map((e) => e.kata),
+      ...dict.entries.map((e) => e.kata),
+    ]),
+  ]
 }
 
 const PY = `
