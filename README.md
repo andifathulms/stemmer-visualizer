@@ -30,6 +30,20 @@ The rule pack currently ships **unverified** rules. They are marked as such in t
 the rule reference UI, and the validator refuses any rule missing the field. Do not treat an
 `unverified` rule as sourced. Flipping a rule to `verified` requires reading the cited table.
 
+## What is built
+
+| Page | |
+|---|---|
+| `/id/kupas` | The trace: word with morpheme boundaries, steps as ruled lines, step-through, backtracks struck through, dictionary-free comparison. |
+| `/id/kandidat` | Every admissible segmentation as a tree, dictionary-valid leaves marked, the chosen path highlighted. |
+| `/id/kamus` | The dictionary as an editable input, with provenance and the rows consulted by the current trace. |
+| `/id/aturan` | Every rule with its pattern, readings, precedence, example and citation. |
+| `/id/galeri` | Six words the algorithm gets wrong, recomputed live so entries cannot go stale. |
+| `/id/dokumen` | Paste text; roots, plus flags for multi-candidate and unmatched words. |
+
+Not built: the 2005 rule pack and therefore the 1996-versus-2005 comparison, and the peeling
+animation. See the current-state table in `CLAUDE.md`.
+
 ## Sources
 
 - Nazief, B. & Adriani, M. (1996). *Confix-Stripping: Approach to Stemming Algorithm for Bahasa

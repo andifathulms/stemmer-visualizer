@@ -152,4 +152,31 @@ Sastrawi is linked prominently as the production library — accurate and genero
 
 ## Current state
 
-M0 — not yet scaffolded. Next: static export deploying to Pages, then the rule-pack schema and validator. **No rule content before the validator exists.**
+M0–M4 and M6 are in. M5 is partial.
+
+| | | |
+|---|---|---|
+| M0 | Scaffold | Done. Static export, `basePath` from the repo name, Actions deploy gated on `rules:validate`. |
+| M1 | Engine | Done. Interpreter, both traversals, recoding, backtracking, trace. 39 tests green. |
+| M2 | Trace UI | Done. Word with boundaries, step list, step-through, rule links. |
+| M3 | Dictionary | Done. Editable panel, per-word provenance, edits carried in the URL hash. |
+| M4 | Candidates | Done. Enumeration, candidate tree, ambiguity reported with a reason. |
+| M5 | Variants | **Partial.** The dictionary-free comparison ships. The 2005 pack does not exist. |
+| M6 | Reference + gallery | Done. Rule reference, six-entry failure gallery, document mode. |
+
+**The one thing to know before touching anything:** every rule in `data/rules/na96.json` is
+`verification: "unverified"`. The pack was written from the widely-reproduced form of the rule
+table, not from the papers. Citations point at where each rule *should* be checked. Read
+`data/rules/GAPS.md` before adding, changing or citing a rule.
+
+Next, in order:
+
+1. **Verify the pack against the papers**, peluruhan rules first — `GAPS.md` has the priority list.
+   Flip each rule to `verified` as it is checked; the fixture-count assertion in
+   `tests/papers/worked-examples.test.ts` will fail and want updating, which is the point.
+2. **Run the oracle.** `pnpm fixtures:record`, then classify every divergence in
+   `tests/oracle/divergences.md`. Two are already predicted there.
+3. **The 2005 pack** — only from the paper. It needs reduplicated compounds, `-pun`, revised `me-`
+   handling and the changed step order, and it unlocks the rest of M5.
+4. **The peeling animation.** The trace updates as you step, but the one orchestrated moment PRD §8
+   asks for — affix detaching and sliding aside, stem re-centring, lookup flashing — is not built.
