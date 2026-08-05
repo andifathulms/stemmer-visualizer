@@ -25,10 +25,19 @@ For each divergence, write an entry in `divergences.md` with:
 2. Which rule or step caused the split — the trace makes this findable.
 3. A classification:
    - **`bug-kami`** — we are wrong. Fix the rule, and add a fixture first.
+   - **`beda-kamus`** — the rules agree; the dictionaries do not. Prove it: add the word the other
+     side has and check the answers converge. The first run produced two of these, and one of them
+     showed the *larger* dictionary giving the worse answer.
    - **`pilihan-sastrawi`** — Sastrawi makes an implementation choice that departs from the paper.
      Record what the choice is and where the paper says otherwise.
    - **`ambigu`** — both are defensible; the word has more than one valid root.
    - **`belum-jelas`** — not yet understood. This is an honest state and it is allowed to persist.
+
+Every classification gets an assertion in `divergences.test.ts`. Prose rots: a rule changes, the
+explanation stops being true, and the entry goes on reading as authoritative. For a `beda-kamus`
+entry the assertion is a real proof — swap the dictionary, reproduce the other answer. For a rule
+cause it pins the current, known-wrong output so a fix cannot land without the entry being
+rewritten. Those assertions expect wrong answers on purpose; never "correct" them.
 4. The reasoning. This record is itself a contribution — PRD §7.
 
 Never auto-align to Sastrawi to make a test pass, and never assume Sastrawi is right by default.
