@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import type { Copy, Locale, SectionKey } from '@/lib/i18n'
@@ -21,6 +22,14 @@ import { LOCALES } from '@/lib/i18n'
  * gesture as underlining a heading in an exercise book — and with
  * `aria-current`, so it never rests on colour alone.
  */
+/**
+ * `next/image` does not prefix `basePath` when `images.unoptimized` is set —
+ * it emits the src verbatim — so the mark 404s on Pages unless the prefix is
+ * written in. The icon and manifest links in app/layout.tsx get theirs from
+ * the file conventions; this one has to ask.
+ */
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+
 const MULAI: readonly SectionKey[] = ['kupas', 'kandidat']
 const DALAM: readonly SectionKey[] = ['kamus', 'aturan', 'galeri', 'dokumen']
 
@@ -49,15 +58,32 @@ export function SiteHeader({ locale, copy }: { locale: Locale; copy: Copy }) {
     <header className="sticky top-0 z-30 border-b border-ruleLine bg-paper/95 backdrop-blur-sm">
       <div className="mx-auto w-full max-w-5xl px-5 pt-4 sm:px-8">
         <div className="flex items-start justify-between gap-4">
-          <Link href={`/${locale}/`} className="block">
-            {/* The wordmark stays in the mono face — it is the face the words
-                under analysis are set in, which is the point. `kupas` survives
-                as the name of the trace section, where it is a good verb. */}
-            <span className="font-word text-lg tracking-tight text-pen sm:text-xl">
-              {copy.brandName}
-            </span>
-            <span className="mt-0.5 hidden max-w-sm font-ui text-xs leading-snug text-pencil sm:block">
-              {copy.brandTagline}
+          <Link href={`/${locale}/`} className="flex items-center gap-2.5">
+            {/* The mark is the product in miniature: affixes peeled off in
+                grey, the root left standing in red. At this size the brand
+                rules call for the simplified two-block form — below 40px the
+                four-block mark closes up — so this is the same file the
+                browser tab uses. Decorative: the wordmark beside it already
+                names the site. */}
+            <Image
+              src={`${basePath}/brand/mark.svg`}
+              alt=""
+              aria-hidden
+              width={26}
+              height={26}
+              priority
+              className="h-[26px] w-[26px] shrink-0 rounded-[6px]"
+            />
+            <span className="block">
+              {/* Serif, per the brand rules — the wordmark matches the page
+                  headline. The mono face stays reserved for words under
+                  analysis, which is the distinction worth protecting. */}
+              <span className="block font-prose text-lg font-semibold leading-tight tracking-tight text-pen sm:text-xl">
+                {copy.brandName}
+              </span>
+              <span className="mt-0.5 hidden max-w-sm font-ui text-xs leading-snug text-pencil sm:block">
+                {copy.brandTagline}
+              </span>
             </span>
           </Link>
 

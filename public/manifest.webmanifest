@@ -1,0 +1,16 @@
+{
+  "name": "Stemmer Visualizer",
+  "short_name": "Stemmer",
+  "description": "Ketik satu kata Indonesia dan lihat imbuhannya dikupas satu per satu — aturan mana yang berlaku, kamus mana yang dicek, dan kata dasar lain yang juga mungkin.",
+  "lang": "id",
+  "start_url": "id/",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F3F3EF",
+  "theme_color": "#1B2430",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

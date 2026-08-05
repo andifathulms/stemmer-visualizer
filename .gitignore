@@ -9,3 +9,6 @@ coverage/
 next-env.d.ts
 tsconfig.tsbuildinfo
 tests/oracle/fixtures.json
+
+# Brand working files. The shipped subset lives in app/ and public/brand/.
+exports/
