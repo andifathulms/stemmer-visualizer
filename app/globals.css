@@ -79,6 +79,13 @@
       hover:opacity-85;
   }
 
+  /* A primary action with nothing to do. It had no disabled state at all, so a
+     button that could do nothing looked identical to one that could — which is
+     what "I clicked it and nothing happened" actually means most of the time. */
+  .tombol-utama:disabled {
+    @apply cursor-not-allowed border-ruleLine bg-transparent text-pencil hover:opacity-100;
+  }
+
   /* A tappable example word. Generous target — these are the main way a
      first-time visitor gets a word into the box on a phone. */
   .contoh {

@@ -29,13 +29,24 @@ export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
 
   const edited = dictionary.size !== baseDictionary.size
 
+  /**
+   * Whether pressing the button would change anything.
+   *
+   * Submitting the word that is already being analysed recomputes an identical
+   * trace and an identical tree, so the page does not move — the control reads
+   * as broken when it is merely idle. Saying so up front is the fix; the
+   * alternative is a button whose only feedback is the absence of feedback.
+   */
+  const kata = draft.trim()
+  const bisaKupas = kata !== '' && kata !== state.kata
+
   return (
     <div className="space-y-4">
       <form
         className="flex flex-wrap items-end gap-3"
         onSubmit={(event) => {
           event.preventDefault()
-          setKata(draft.trim())
+          if (bisaKupas) setKata(kata)
         }}
       >
         <label className="flex-1 basis-64">
@@ -68,7 +79,11 @@ export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
           </label>
         )}
 
-        <button className="tombol-utama py-2.5">{copy.wordSubmit} →</button>
+        {/* No arrow: it read as navigation, and next to a nav item of the same
+            name on the Kandidat page it looked like a link to the trace. */}
+        <button className="tombol-utama py-2.5" disabled={!bisaKupas}>
+          {copy.wordSubmit}
+        </button>
       </form>
 
       <div>

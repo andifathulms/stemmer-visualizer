@@ -107,6 +107,16 @@ export function CandidateTreeView({ copy, locale }: { copy: Copy; locale: Locale
       <header>
         <h1>{copy.nav.kandidat}</h1>
         <p className="mt-3 max-w-baca leading-relaxed">{copy.navHint.kandidat}</p>
+        {/* The trace page links here; nothing linked back, so the two halves of
+            the app were a one-way trip. */}
+        <p className="mt-3 font-ui text-sm">
+          <Link
+            className="text-pen underline decoration-ruleLine underline-offset-4 hover:decoration-pen"
+            href={`/${locale}/kupas/`}
+          >
+            {copy.seeTrace} →
+          </Link>
+        </p>
       </header>
 
       <WordInput copy={copy} locale={locale} />

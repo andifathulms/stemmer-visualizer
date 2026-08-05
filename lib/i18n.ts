@@ -82,6 +82,8 @@ export interface Copy {
     string
   >
 
+  /** Cross-link from the candidate tree back to the trace. */
+  readonly seeTrace: string
   readonly traceIntro: string
   readonly examplesLabel: string
   readonly examples: readonly ExampleCopy[]
@@ -212,6 +214,7 @@ const id: Copy = {
     konfiks: 'Sepasang awalan dan akhiran yang datang bersamaan, misalnya per-…-an.',
   },
 
+  seeTrace: 'Lihat jejak langkah demi langkah untuk kata ini',
   traceIntro:
     'Ketik satu kata berimbuhan. Di bawahnya, setiap langkah yang benar-benar dijalankan algoritma — termasuk langkah yang kemudian dibatalkan, karena pencariannya sendiri yang ingin diperlihatkan di sini.',
   examplesLabel: 'Coba kata ini',
@@ -351,6 +354,7 @@ const en: Copy = {
     konfiks: 'A prefix and suffix that arrive as a pair, such as per-…-an.',
   },
 
+  seeTrace: 'See the step-by-step trace for this word',
   traceIntro:
     'Type an affixed word. Below it, every step the algorithm actually took — including the ones it later undid, because the search being visible as a search is the point.',
   examplesLabel: 'Try one of these',
