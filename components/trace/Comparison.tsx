@@ -5,7 +5,7 @@ import { useKupas } from '@/components/app/KupasProvider'
 import { interpret } from '@/lib/engine/interpret'
 import { EMPTY_DICTIONARY } from '@/lib/dictionary'
 import { isRemoval } from '@/lib/engine/trace'
-import type { Copy, Locale } from '@/lib/i18n'
+import type { Locale } from '@/lib/i18n'
 
 /**
  * Variant comparison — PRD §5.5, partially.
@@ -20,7 +20,7 @@ import type { Copy, Locale } from '@/lib/i18n'
  * changed step order — and writing them from memory would be exactly the
  * reconstruction CLAUDE.md forbids.
  */
-export function Comparison({ copy, locale }: { copy: Copy; locale: Locale }) {
+export function Comparison({ locale }: { locale: Locale }) {
   const { pack, dictionary, state } = useKupas()
 
   const withDictionary = useMemo(
@@ -70,7 +70,6 @@ export function Comparison({ copy, locale }: { copy: Copy; locale: Locale }) {
           ? 'The 1996-versus-2005 comparison is not built. The 2005 extensions are a separate rule pack, and writing one from memory rather than from the paper would make the comparison meaningless.'
           : 'Perbandingan 1996 lawan 2005 belum ada. Perluasan 2005 adalah paket aturan tersendiri, dan menyusunnya dari ingatan alih-alih dari makalah akan membuat perbandingannya tidak berarti.'}
       </p>
-      <span className="sr-only">{copy.variantLabel}</span>
     </section>
   )
 }

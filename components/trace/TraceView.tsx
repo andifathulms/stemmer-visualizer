@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useKupas } from '@/components/app/KupasProvider'
-import { Kata } from '@/components/word/Kata'
+import { Kata, type Peeling } from '@/components/word/Kata'
 import { StepList } from './StepList'
 import { WordInput } from '@/components/app/WordInput'
 import { AmbiguityNote } from './AmbiguityNote'
@@ -20,18 +20,53 @@ import type { Copy, Locale } from '@/lib/i18n'
 export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
   const { trace } = useKupas()
   const [visible, setVisible] = useState(trace.steps.length)
+  const [playing, setPlaying] = useState(false)
 
-  useEffect(() => setVisible(trace.steps.length), [trace])
+  useEffect(() => {
+    setVisible(trace.steps.length)
+    setPlaying(false)
+  }, [trace])
 
   const segmentation = useMemo(() => segmentAt(trace, visible), [trace, visible])
   const atEnd = visible >= trace.steps.length
+
+  /**
+   * What the step now on screen did, so the word can act it out — PRD §8. An
+   * abandoned removal is a backtrack: the word does not change, so the peeling
+   * plays in reverse instead of nothing happening at all.
+   */
+  const peeling: Peeling = useMemo(() => {
+    const step = trace.steps[visible - 1]
+    if (!step) return null
+    if (step.type === 'cek-kamus') return step.found ? { kind: 'ketemu' } : null
+    if (step.type !== 'buang') return null
+    if (step.abandoned) return { kind: 'mundur' }
+    return step.rule.type === 'awalan' ? { kind: 'buang-awalan' } : { kind: 'buang-akhiran' }
+  }, [trace, visible])
+
+  // Walking the trace one step at a time, on a timer. Stops at the end, and at
+  // any manual interaction.
+  useEffect(() => {
+    if (!playing) return
+    if (visible >= trace.steps.length) {
+      setPlaying(false)
+      return
+    }
+    const timer = setTimeout(() => setVisible((v) => Math.min(trace.steps.length, v + 1)), 900)
+    return () => clearTimeout(timer)
+  }, [playing, visible, trace.steps.length])
+
+  const step = (next: number) => {
+    setPlaying(false)
+    setVisible(next)
+  }
 
   return (
     <div className="space-y-8">
       <WordInput copy={copy} />
 
       <section className="bg-ruled bg-[length:100%_32px] py-4">
-        <Kata segmentation={segmentation} />
+        <Kata segmentation={segmentation} peeling={peeling} beat={visible} />
       </section>
 
       <section className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -52,7 +87,7 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
         <AmbiguityNote ambiguity={trace.ambiguity} copy={copy} locale={locale} />
       )}
 
-      <Comparison copy={copy} locale={locale} />
+      <Comparison locale={locale} />
 
       <section>
         <div className="flex items-center justify-between gap-4 pb-2">
@@ -62,31 +97,42 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
           <div className="flex items-center gap-2 font-ui text-xs">
             <button
               className="border border-ruleLine px-2 py-1 disabled:opacity-40"
-              onClick={() => setVisible(1)}
+              onClick={() => step(1)}
               disabled={visible <= 1}
             >
               ⏮
             </button>
             <button
               className="border border-ruleLine px-2 py-1 disabled:opacity-40"
-              onClick={() => setVisible((v) => Math.max(1, v - 1))}
+              onClick={() => step(Math.max(1, visible - 1))}
               disabled={visible <= 1}
             >
               ←
+            </button>
+            <button
+              className="border border-ruleLine px-2 py-1"
+              onClick={() => {
+                if (playing) return setPlaying(false)
+                if (atEnd) setVisible(1)
+                setPlaying(true)
+              }}
+              title={locale === 'en' ? 'play the trace' : 'putar jejaknya'}
+            >
+              {playing ? '❙❙' : '▶'}
             </button>
             <span className="w-16 text-center text-pencil">
               {visible}/{trace.steps.length}
             </span>
             <button
               className="border border-ruleLine px-2 py-1 disabled:opacity-40"
-              onClick={() => setVisible((v) => Math.min(trace.steps.length, v + 1))}
+              onClick={() => step(Math.min(trace.steps.length, visible + 1))}
               disabled={atEnd}
             >
               →
             </button>
             <button
               className="border border-ruleLine px-2 py-1 disabled:opacity-40"
-              onClick={() => setVisible(trace.steps.length)}
+              onClick={() => step(trace.steps.length)}
               disabled={atEnd}
             >
               ⏭
@@ -99,7 +145,7 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
           copy={copy}
           locale={locale}
           visible={visible}
-          onHover={setVisible}
+          onHover={step}
         />
       </section>
     </div>
