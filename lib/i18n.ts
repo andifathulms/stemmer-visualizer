@@ -94,6 +94,17 @@ export interface Copy {
   readonly notFound: string
   readonly ambiguous: string
   readonly ambiguousLead: string
+
+  /** Why a word came back unstemmed — see lib/app/kegagalan.ts. */
+  readonly kegagalan: {
+    readonly title: string
+    /** `{kata}` is the last form the algorithm reached. */
+    readonly lead: string
+    readonly triedLabel: string
+    readonly add: string
+    readonly added: string
+    readonly note: string
+  }
   readonly stepsLabel: string
   readonly stepsHint: string
   readonly abandoned: string
@@ -221,6 +232,14 @@ const id: Copy = {
   ambiguous: 'Jawabannya lebih dari satu',
   ambiguousLead:
     'Kata ini punya lebih dari satu kemungkinan kata dasar. Algoritma memilih salah satu.',
+  kegagalan: {
+    title: 'Algoritmanya jalan — kamusnya yang kurang',
+    lead: 'Imbuhan berhasil dilepas dan algoritma sampai ke “{kata}”, lalu membuangnya: kata itu tidak ada di kamus ini. Jadi yang gagal bukan aturannya, melainkan daftar kata dasarnya.',
+    triedLabel: 'Bentuk yang sempat dicoba dan tidak ketemu',
+    add: 'tambahkan ke kamus',
+    added: 'sudah ditambahkan',
+    note: 'Tambahkan salah satunya, lalu lihat jawabannya berubah seketika. Itulah maksudnya: hasil algoritma ini bergantung pada kamus sama besarnya dengan pada aturannya. Belum tentu semua bentuk di atas adalah kata dasar yang sah — Anda yang menentukan.',
+  },
   stepsLabel: 'Langkah',
   stepsHint: 'Arahkan kursor ke satu baris untuk melihat kata pada langkah itu.',
   abandoned: 'dibatalkan',
@@ -351,6 +370,14 @@ const en: Copy = {
   ambiguous: 'More than one answer',
   ambiguousLead:
     'This word has more than one plausible root (kata dasar). The algorithm picks one of them.',
+  kegagalan: {
+    title: 'The algorithm worked — the dictionary came up short',
+    lead: 'The affixes came off and the algorithm reached “{kata}”, then discarded it: that word is not in this dictionary. What failed is the list of roots, not the rules.',
+    triedLabel: 'Forms it tried and did not find',
+    add: 'add to dictionary',
+    added: 'added',
+    note: 'Add one and watch the answer change immediately. That is the point: this algorithm depends on its dictionary as much as on its rules. Not every form above is necessarily a legitimate root — that judgement is yours.',
+  },
   stepsLabel: 'Steps',
   stepsHint: 'Hover a line to see the word as it stood at that step.',
   abandoned: 'abandoned',

@@ -8,8 +8,10 @@ import { WordInput } from '@/components/app/WordInput'
 import { AmbiguityNote } from './AmbiguityNote'
 import { Comparison } from './Comparison'
 import { Legenda } from '@/components/Legenda'
+import { KegagalanNote } from './KegagalanNote'
 import { Istilah } from '@/components/Istilah'
 import { segmentAt } from '@/lib/app/segmentation'
+import { jelaskanKegagalan } from '@/lib/app/kegagalan'
 import type { Copy, Locale } from '@/lib/i18n'
 
 /**
@@ -39,6 +41,7 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
   }, [trace])
 
   const segmentation = useMemo(() => segmentAt(trace, visible), [trace, visible])
+  const kegagalan = useMemo(() => jelaskanKegagalan(trace), [trace])
   const atEnd = visible >= trace.steps.length
 
   /**
@@ -114,6 +117,8 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
           )}
         </div>
       </section>
+
+      {kegagalan && <KegagalanNote kegagalan={kegagalan} copy={copy} />}
 
       <Legenda copy={copy} />
 
