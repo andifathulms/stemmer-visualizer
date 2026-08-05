@@ -1,4 +1,5 @@
 import type { Copy } from '@/lib/i18n'
+import { MakerSignature } from './MakerSignature'
 
 /**
  * The honesty note, given its own weight — PRD "Framing". Sastrawi is linked
@@ -23,9 +24,16 @@ export function SiteFooter({ copy }: { copy: Copy }) {
             {copy.honesty.link} ↗
           </a>
         </p>
-        <p className="mt-6 max-w-baca border-t border-ruleLine/60 pt-4 font-ui text-xs leading-relaxed text-pencil">
-          {copy.disclaimer}
-        </p>
+        {/* The one bottom seam, shared. The disclaimer is the project's legal
+            and framing note; the maker's mark is a personal credit. They sit at
+            opposite ends of the same rule rather than being run together or
+            given a divider each. */}
+        <div className="mt-6 flex flex-col gap-5 border-t border-ruleLine/60 pt-4 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+          <p className="max-w-baca font-ui text-xs leading-relaxed text-pencil">
+            {copy.disclaimer}
+          </p>
+          <MakerSignature />
+        </div>
       </div>
     </footer>
   )
