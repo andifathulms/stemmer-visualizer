@@ -137,7 +137,12 @@ export type RuleType = Rule['type']
  * proceeding (PRD §3 step 4).
  */
 export const forbiddenSchema = z.object({
-  awalan: z.string().min(1),
+  /**
+   * Keyed by prefix *type*, not by surface form: the paper forbids "be- with
+   * -i", which covers ber-, bel- and be- alike. Keying by surface would make
+   * the table three times as long and silently miss an allomorph.
+   */
+  jenis: z.enum(['di', 'ke', 'se', 'te', 'me', 'be', 'pe']),
   akhiran: z.array(z.string().min(1)).min(1),
   citation: citationSchema,
   verification: verificationSchema,

@@ -19,23 +19,25 @@ export function ruleById(pack: RulePack, id: string): Rule | undefined {
 }
 
 /**
- * The forbidden prefix-suffix combination for a given prefix, if any.
+ * The forbidden-combination entry for a prefix type, if the table has one.
  * Consulted before prefix removal — PRD §3 step 4.
  */
-export function forbiddenFor(pack: RulePack, awalan: string): Forbidden | undefined {
-  return pack.forbidden.find((entry) => entry.awalan === awalan)
+export function forbiddenFor(pack: RulePack, jenis: Forbidden['jenis']): Forbidden | undefined {
+  return pack.forbidden.find((entry) => entry.jenis === jenis)
 }
 
 /**
- * Is removing `akhiran` from a word beginning with `awalan` a combination the
- * paper forbids? Returns the table entry so the trace can cite it.
+ * Does the prefix type `jenis` clash with any suffix already removed? Returns
+ * the table entry so the trace can cite it, and the offending suffix so the
+ * trace can say which one it was.
  */
 export function forbiddenCombination(
   pack: RulePack,
-  awalan: string,
-  akhiran: readonly string[],
-): Forbidden | undefined {
-  const entry = forbiddenFor(pack, awalan)
+  jenis: Forbidden['jenis'],
+  removedAkhiran: readonly string[],
+): { entry: Forbidden; akhiran: string } | undefined {
+  const entry = forbiddenFor(pack, jenis)
   if (!entry) return undefined
-  return entry.akhiran.some((a) => akhiran.includes(a)) ? entry : undefined
+  const akhiran = entry.akhiran.find((a) => removedAkhiran.includes(a))
+  return akhiran === undefined ? undefined : { entry, akhiran }
 }

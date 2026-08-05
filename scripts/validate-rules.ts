@@ -136,19 +136,29 @@ function checkPrecedenceConflicts(pack: RulePack): void {
 }
 
 function checkForbidden(pack: RulePack): void {
-  const prefixes = new Set(
-    pack.rules.filter((rule) => rule.type === 'awalan').map((rule) => rule.awalan),
+  const types = new Set(
+    pack.rules.filter((rule) => rule.type === 'awalan').map((rule) => rule.jenis),
   )
+  const akhiran = new Set(
+    pack.rules.filter((rule) => rule.type !== 'awalan').map((rule) => rule.akhiran),
+  )
+
   for (const entry of pack.forbidden) {
-    if (prefixes.size > 0 && !prefixes.has(entry.awalan)) {
-      fail(`forbidden[${entry.awalan}]`, 'names a prefix that no rule in this pack produces')
+    const where = `forbidden[${entry.jenis}]`
+    if (types.size > 0 && !types.has(entry.jenis)) {
+      fail(where, 'names a prefix type that no rule in this pack produces')
+    }
+    for (const suffix of entry.akhiran) {
+      if (akhiran.size > 0 && !akhiran.has(suffix)) {
+        fail(where, `names suffix "${suffix}" that no rule in this pack removes`)
+      }
     }
     if (!pack.sources[entry.citation.source]) {
-      fail(`forbidden[${entry.awalan}]`, `citation.source "${entry.citation.source}" undeclared`)
+      fail(where, `citation.source "${entry.citation.source}" undeclared`)
     }
     if (entry.verification === 'unverified') {
       notes.push(
-        `forbidden ${entry.awalan} — unverified, cited to ${entry.citation.source} ${entry.citation.locus}`,
+        `forbidden ${entry.jenis} — unverified, cited to ${entry.citation.source} ${entry.citation.locus}`,
       )
     }
   }
