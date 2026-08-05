@@ -9,6 +9,31 @@
 
   body {
     @apply bg-paper text-pen font-prose antialiased;
+    /* Literata sits small for its size; a notch up keeps the page in the
+       register of a printed school text rather than a web app. */
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  /* Headings are the serif, tightened. The scale is deliberately short —
+     page title, section, sub — because the app only ever needs three. */
+  h1 {
+    @apply font-prose text-3xl font-semibold leading-tight tracking-tight sm:text-4xl;
+  }
+
+  h2 {
+    @apply font-prose text-xl font-semibold leading-snug;
+  }
+
+  h3 {
+    @apply font-prose text-base font-semibold leading-snug;
+  }
+
+  /* One visible focus treatment everywhere, in pen rather than the browser
+     blue, so keyboard users get the same paper-and-ink surface everyone else
+     does. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-pen ring-offset-2 ring-offset-paper;
   }
 
   ::selection {
@@ -24,7 +49,48 @@
 
   /* An abandoned working-out: struck through, still readable — PRD §8. */
   .dicoret {
-    @apply text-pencil line-through decoration-pencil/80;
+    @apply text-pencil line-through decoration-pencilMark/80;
+  }
+
+  /* A panel laid on the page. Hairline, no shadow: paper does not float. */
+  .kartu {
+    @apply border border-ruleLine bg-paper;
+  }
+
+  /* The label above a field or a section. Small, sans, quiet, and wide-tracked
+     so it reads as a caption rather than as text that got shrunk. */
+  .label {
+    @apply font-ui text-xs font-medium uppercase tracking-wider text-pencil;
+  }
+
+  /* Controls. `tombol` is the quiet default; `tombol-utama` is the one action
+     a page wants you to take, and there is never more than one per view. */
+  .tombol {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-sm border border-ruleLine
+      bg-paper px-3 py-1.5 font-ui text-sm text-pen transition-colors
+      hover:border-pen hover:bg-highlight/15
+      disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-ruleLine
+      disabled:hover:bg-paper;
+  }
+
+  .tombol-utama {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-sm border border-pen
+      bg-pen px-4 py-2 font-ui text-sm font-medium text-paper transition-opacity
+      hover:opacity-85;
+  }
+
+  /* A tappable example word. Generous target — these are the main way a
+     first-time visitor gets a word into the box on a phone. */
+  .contoh {
+    @apply inline-flex min-h-[2.25rem] items-center rounded-sm border border-ruleLine
+      bg-paper px-2.5 py-1 font-word text-sm text-pen transition-colors
+      hover:border-pen hover:bg-highlight/20;
+  }
+
+  /* A term glossed on first use — PRD §8. Dotted underline, never a colour, so
+     it does not compete with the dictionary highlight or the teacher's red. */
+  .istilah {
+    @apply cursor-help underline decoration-pencilMark decoration-dotted underline-offset-4;
   }
 }
 
