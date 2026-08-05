@@ -157,26 +157,38 @@ M0–M4 and M6 are in. M5 is partial.
 | | | |
 |---|---|---|
 | M0 | Scaffold | Done. Static export, `basePath` from the repo name, Actions deploy gated on `rules:validate`. |
-| M1 | Engine | Done. Interpreter, both traversals, recoding, backtracking, trace. 39 tests green. |
-| M2 | Trace UI | Done. Word with boundaries, step list, step-through, rule links. |
+| M1 | Engine | Done. Interpreter, both traversals, recoding, backtracking, trace. 49 tests green. |
+| M2 | Trace UI | Done. Word with boundaries, step list, step-through, rule links, peeling animation. |
 | M3 | Dictionary | Done. Editable panel, per-word provenance, edits carried in the URL hash. |
 | M4 | Candidates | Done. Enumeration, candidate tree, ambiguity reported with a reason. |
 | M5 | Variants | **Partial.** The dictionary-free comparison ships. The 2005 pack does not exist. |
 | M6 | Reference + gallery | Done. Rule reference, six-entry failure gallery, document mode. |
+
+The peeling animation is in, and the differential oracle has been run and classified.
 
 **The one thing to know before touching anything:** every rule in `data/rules/na96.json` is
 `verification: "unverified"`. The pack was written from the widely-reproduced form of the rule
 table, not from the papers. Citations point at where each rule *should* be checked. Read
 `data/rules/GAPS.md` before adding, changing or citing a rule.
 
+The oracle has been run once, 315 words, and the record is in `tests/oracle/divergences.md`. It
+found three of our bugs — two bad dictionary entries and one missing rule — and left six classified
+divergences. Read that file before touching a rule; three of them are open questions about the
+transcription, not about the algorithm.
+
 Next, in order:
 
-1. **Verify the pack against the papers**, peluruhan rules first — `GAPS.md` has the priority list.
-   Flip each rule to `verified` as it is checked; the fixture-count assertion in
-   `tests/papers/worked-examples.test.ts` will fail and want updating, which is the point.
-2. **Run the oracle.** `pnpm fixtures:record`, then classify every divergence in
-   `tests/oracle/divergences.md`. Two are already predicted there.
+1. **Verify the pack against the papers.** `GAPS.md` has the priority list, now headed by the
+   `C`/`P` side conditions rather than the peluruhan rules — the oracle suggests we misread
+   "P ≠ er", and that shape recurs across the ber-, ter- and pe- rules. **All three sources are
+   paywalled or gone**; `GAPS.md` records what was tried, so start from institutional access to the
+   2007 TALIP paper rather than from a search engine. Flip each rule to `verified` as it is checked;
+   the count assertion in `tests/papers/worked-examples.test.ts` will fail and want updating, which
+   is the point.
+2. **Answer the three `belum-jelas` divergences** from the paper, not from intuition. Each has an
+   obvious-looking fix, and each fix would be invented. `divergences.test.ts` pins the current wrong
+   answers so a fix cannot land quietly.
 3. **The 2005 pack** — only from the paper. It needs reduplicated compounds, `-pun`, revised `me-`
    handling and the changed step order, and it unlocks the rest of M5.
-4. **The peeling animation.** The trace updates as you step, but the one orchestrated moment PRD §8
-   asks for — affix detaching and sliding aside, stem re-centring, lookup flashing — is not built.
+4. **Re-run the oracle after any rule change.** `pnpm fixtures:record` needs PySastrawi locally.
+   Snowball's Indonesian stemmer is a candidate second oracle; see `tests/oracle/README.md`.
