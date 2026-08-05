@@ -22,7 +22,9 @@ export default function LocaleLayout({
     <KupasProvider>
       <div className="flex min-h-screen flex-col">
         <SiteHeader locale={params.locale} copy={copy} />
-        <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-8 sm:px-8">{children}</main>
+        <main className="mx-auto w-full max-w-5xl flex-1 px-5 py-10 sm:px-8 sm:py-12">
+          {children}
+        </main>
         <SiteFooter copy={copy} />
       </div>
     </KupasProvider>
