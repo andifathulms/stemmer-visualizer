@@ -1,0 +1,48 @@
+{
+  "catatan": "Kata yang salah dikupas oleh algoritma ini, beserta jenis kegagalannya. Hasil di halaman galeri dihitung ulang setiap kali halaman dibuka, memakai kamus bawaan — jadi entri yang sudah terlanjur benar akan ketahuan, bukan tersembunyi.",
+  "note": "Words this implementation gets wrong, with the failure mode. The gallery recomputes every entry against the shipped dictionary on load, so an entry that has quietly started passing shows up as such instead of hiding.",
+  "entries": [
+    {
+      "kata": "beruang",
+      "seharusnya": "beruang",
+      "jenis": "ambigu",
+      "keteranganId": "Dua kata dasar sama-sama sah: kata dasar beruang, atau ber- + uang. Algoritma berhenti di pencarian kamus pertama dan tidak pernah melihat kemungkinan lain. Yang keliru bukan jawabannya, melainkan diamnya.",
+      "keteranganEn": "Two roots are equally valid: the root beruang, or ber- + uang. The algorithm stops at the first dictionary lookup and never sees the alternative. The error is not the answer, it is the silence."
+    },
+    {
+      "kata": "mengupas",
+      "seharusnya": "kupas",
+      "jenis": "ambigu",
+      "keteranganId": "Aturan 17 punya dua bacaan, meng- + upas dan meng- + kupas, dan keduanya ada di kamus. Bacaan pertama menang karena urutannya lebih dahulu, bukan karena lebih benar.",
+      "keteranganEn": "Aturan 17 has two readings, meng- + upas and meng- + kupas, and both are in the dictionary. The first wins because it comes first, not because it is more correct."
+    },
+    {
+      "kata": "berapa",
+      "seharusnya": "berapa",
+      "jenis": "kelebihan-kupas",
+      "keteranganId": "berapa adalah kata dasar, tetapi tidak ada di kamus bawaan. Aturan berV lalu membuang ber- dan menemukan apa, yang kebetulan ada di kamus. Kegagalan kamus yang menyamar sebagai keberhasilan aturan.",
+      "keteranganEn": "berapa is a root, but it is missing from the shipped dictionary. The berV rule then strips ber- and finds apa, which happens to be there. A dictionary gap wearing the costume of a rule success."
+    },
+    {
+      "kata": "menyanyi",
+      "seharusnya": "nyanyi",
+      "jenis": "kekurangan-kupas",
+      "keteranganId": "Bentuk yang benar adalah me- + nyanyi, tetapi aturan 18 membaca meny- sebagai peluruhan huruf s dan menghasilkan sanyi. Kata dasar nyanyi ada di kamus dan tetap tidak ditemukan: aturannya yang tidak bisa menyatakan bacaan itu.",
+      "keteranganEn": "The correct analysis is me- + nyanyi, but aturan 18 reads meny- as an s that assimilated and produces sanyi. The root nyanyi is in the dictionary and still is not reached: the rule set cannot express that reading."
+    },
+    {
+      "kata": "bertemu",
+      "seharusnya": "temu",
+      "jenis": "salah-analisis",
+      "keteranganId": "Pembuangan imbuhan infleksional bersifat rakus: -mu dibuang lebih dahulu sebagai kata ganti milik, menyisakan berte, dan algoritma tidak pernah kembali untuk mencoba tanpa itu. Menambahkan backtrack di sini akan memperbaiki hasilnya — dan akan menjadi aturan yang kami karang sendiri.",
+      "keteranganEn": "Inflectional removal is greedy: -mu goes first as a possessive, leaving berte, and the algorithm never returns to try without it. Adding a backtrack here would fix the answer — and would be a rule we invented."
+    },
+    {
+      "kata": "terpercaya",
+      "seharusnya": "percaya",
+      "jenis": "kekurangan-kupas",
+      "keteranganId": "Tidak ada aturan ter- yang cocok: aturan 8 mengecualikan P = er, dan aturan 7 menuntut huruf hidup sesudah er. Kata dikembalikan utuh. Lihat data/rules/GAPS.md.",
+      "keteranganEn": "No ter- rule fires: aturan 8 excludes P = er and aturan 7 requires a vowel after er, so the word comes back untouched. See data/rules/GAPS.md."
+    }
+  ]
+}
