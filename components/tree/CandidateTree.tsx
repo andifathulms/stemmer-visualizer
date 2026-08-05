@@ -101,13 +101,15 @@ export function CandidateTreeView({ copy, locale }: { copy: Copy; locale: Locale
   )
 
   return (
-    <div className="space-y-8">
-      <WordInput copy={copy} />
+    <div className="space-y-10">
+      {/* The heading leads. It used to sit below the input, so the page
+          announced what it was only after asking you to use it. */}
+      <header>
+        <h1>{copy.nav.kandidat}</h1>
+        <p className="mt-3 max-w-baca leading-relaxed">{copy.navHint.kandidat}</p>
+      </header>
 
-      <section className="max-w-2xl space-y-2">
-        <h1 className="font-word text-2xl">{copy.nav.kandidat}</h1>
-        <p className="text-sm leading-relaxed">{copy.navHint.kandidat}</p>
-      </section>
+      <WordInput copy={copy} locale={locale} />
 
       <section>
         <h2 className="font-ui text-sm text-pencil">

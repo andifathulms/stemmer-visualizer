@@ -1,12 +1,26 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useKupas } from './KupasProvider'
-import type { Copy } from '@/lib/i18n'
+import type { Copy, Locale } from '@/lib/i18n'
 
-const CONTOH = ['menyapu', 'beruang', 'mengupas', 'perusakan', 'mempelajari', 'terpercaya']
-
-export function WordInput({ copy }: { copy: Copy }) {
+/**
+ * The one control the whole app turns on.
+ *
+ * Three things changed here, all of them about a first-time visitor:
+ *
+ * - The examples carry the reason they are worth trying. A bare row of six
+ *   Indonesian words is only useful to someone who already knows which of them
+ *   is interesting — which is precisely the person who does not need it.
+ * - The variant select is hidden while only one rule pack exists. A dropdown
+ *   with a single option reads as a broken control, and M5 has not shipped the
+ *   2005 pack.
+ * - The dictionary count links to the dictionary. It is the app's central
+ *   claim — the answer depends on this list — and it used to be dead text
+ *   hardcoded in Indonesian regardless of locale.
+ */
+export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
   const { state, setKata, pack, packs, setVarian, dictionary, baseDictionary } = useKupas()
   const [draft, setDraft] = useState(state.kata)
 
@@ -15,7 +29,7 @@ export function WordInput({ copy }: { copy: Copy }) {
   const edited = dictionary.size !== baseDictionary.size
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <form
         className="flex flex-wrap items-end gap-3"
         onSubmit={(event) => {
@@ -23,51 +37,75 @@ export function WordInput({ copy }: { copy: Copy }) {
           setKata(draft.trim())
         }}
       >
-        <label className="flex-1 basis-56">
-          <span className="block font-ui text-xs text-pencil">{copy.wordLabel}</span>
+        <label className="flex-1 basis-64">
+          <span className="label block">{copy.wordLabel}</span>
           <input
-            className="mt-1 w-full border-b border-ruleLine bg-transparent py-1 font-word text-xl outline-none focus:border-pen"
+            className="mt-1.5 w-full rounded-sm border border-ruleLine bg-paper px-3 py-2 font-word text-2xl text-pen outline-none transition-colors placeholder:text-pencilMark/70 focus:border-pen"
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
+            placeholder={copy.wordPlaceholder}
             spellCheck={false}
             autoComplete="off"
+            autoCapitalize="none"
           />
         </label>
 
-        <label>
-          <span className="block font-ui text-xs text-pencil">{copy.variantLabel}</span>
-          <select
-            className="mt-1 border-b border-ruleLine bg-transparent py-1 font-ui text-sm outline-none"
-            value={pack.id}
-            onChange={(event) => setVarian(event.target.value)}
-          >
-            {packs.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.nama}
-              </option>
-            ))}
-          </select>
-        </label>
+        {packs.length > 1 && (
+          <label>
+            <span className="label block">{copy.variantLabel}</span>
+            <select
+              className="mt-1.5 rounded-sm border border-ruleLine bg-paper px-2 py-2.5 font-ui text-sm outline-none focus:border-pen"
+              value={pack.id}
+              onChange={(event) => setVarian(event.target.value)}
+            >
+              {packs.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.nama}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
 
-        <button className="border border-pen px-3 py-1 font-ui text-sm hover:bg-highlight/20">
-          {copy.wordLabel} →
-        </button>
+        <button className="tombol-utama py-2.5">{copy.wordSubmit} →</button>
       </form>
 
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-ui text-xs text-pencil">
-        {CONTOH.map((word) => (
-          <button
-            key={word}
-            className="font-word underline decoration-ruleLine hover:text-pen"
-            onClick={() => setKata(word)}
-          >
-            {word}
-          </button>
-        ))}
-        <span className="ml-auto">
-          {dictionary.size} kata di kamus{edited ? ' (disunting)' : ''}
-        </span>
+      <div>
+        <span className="label">{copy.examplesLabel}</span>
+        <ul className="mt-2 flex flex-wrap gap-2">
+          {copy.examples.map((example) => (
+            <li key={example.kata}>
+              <button
+                className="contoh"
+                onClick={() => setKata(example.kata)}
+                aria-current={example.kata === state.kata ? 'true' : undefined}
+              >
+                <span>{example.kata}</span>
+                <span className="ml-2 font-ui text-xs font-normal text-pencil">
+                  {example.alasan}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
+
+      <p className="font-ui text-xs text-pencil">
+        <Link
+          href={`/${locale}/kamus/`}
+          className="underline decoration-ruleLine underline-offset-4 hover:text-pen"
+        >
+          {copy.dictionaryCount.replace(
+            '{n}',
+            dictionary.size.toLocaleString(locale === 'id' ? 'id-ID' : 'en-GB'),
+          )}
+        </Link>
+        {edited && (
+          <span className="ml-2 rounded-sm bg-highlight/40 px-1.5 py-0.5 text-pen">
+            {copy.dictionaryEdited}
+          </span>
+        )}
+      </p>
     </div>
   )
 }

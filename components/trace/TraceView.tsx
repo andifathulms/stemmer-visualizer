@@ -7,6 +7,8 @@ import { StepList } from './StepList'
 import { WordInput } from '@/components/app/WordInput'
 import { AmbiguityNote } from './AmbiguityNote'
 import { Comparison } from './Comparison'
+import { Legenda } from '@/components/Legenda'
+import { Istilah } from '@/components/Istilah'
 import { segmentAt } from '@/lib/app/segmentation'
 import type { Copy, Locale } from '@/lib/i18n'
 
@@ -16,7 +18,16 @@ import type { Copy, Locale } from '@/lib/i18n'
  *
  * This component computes nothing (invariant 13): the trace comes from the
  * engine and the segmentation from a pure helper.
+ *
+ * The layout change is about the payoff. The answer used to be a line of body
+ * text several sections below the word, so the two halves of the sentence this
+ * page is making — "this word" and "becomes this root" — were never on screen
+ * together. They now share one panel.
  */
+
+/** The vocabulary a reader needs before the trace means anything. */
+const ISTILAH = ['awalan', 'akhiran', 'kataDasar', 'peluruhan', 'konfiks'] as const
+
 export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
   const { trace } = useKupas()
   const [visible, setVisible] = useState(trace.steps.length)
@@ -62,92 +73,147 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
   }
 
   return (
-    <div className="space-y-8">
-      <WordInput copy={copy} />
+    <div className="space-y-10">
+      <header>
+        <h1>{copy.nav.kupas}</h1>
+        <p className="mt-3 max-w-baca leading-relaxed">{copy.traceIntro}</p>
 
-      <section className="bg-ruled bg-[length:100%_32px] py-4">
-        <Kata segmentation={segmentation} peeling={peeling} beat={visible} />
+        {/* The grammatical vocabulary stays Indonesian in both locales
+            (invariant 15), so it is explained in place rather than replaced. */}
+        <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 font-ui text-xs text-pencil">
+          <span className="label">{copy.glosariumLabel}</span>
+          {ISTILAH.map((term) => (
+            <Istilah key={term} term={term} copy={copy}>
+              <span className="font-ui text-xs">
+                {term === 'kataDasar' ? 'kata dasar' : term}
+              </span>
+            </Istilah>
+          ))}
+        </p>
+      </header>
+
+      <WordInput copy={copy} locale={locale} />
+
+      {/* The word and its answer, together, on the ruling. */}
+      <section aria-label={copy.resultLabel} className="kartu overflow-hidden">
+        <div className="bg-ruled bg-[length:100%_32px] px-5 py-6">
+          <Kata segmentation={segmentation} peeling={peeling} beat={visible} />
+        </div>
+
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-ruleLine bg-paperEdge/60 px-5 py-4">
+          <span className="label">{copy.resultLabel}</span>
+          {trace.found ? (
+            // Teacher's red: the answer. Nothing else in the app is red, except
+            // genuine ambiguity — PRD §8, invariant 14.
+            <span className="font-word text-3xl text-teacher">{trace.result}</span>
+          ) : (
+            <>
+              <span className="font-word text-3xl text-pen">{trace.result}</span>
+              <span className="font-ui text-xs text-pencil">— {copy.notFound}</span>
+            </>
+          )}
+        </div>
       </section>
 
-      <section className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="font-ui text-sm text-pencil">{copy.resultLabel}:</span>
-        {trace.found ? (
-          // Teacher's red: the answer. Nothing else in the app is red, except
-          // genuine ambiguity — PRD §8, invariant 14.
-          <span className="font-word text-2xl text-teacher">{trace.result}</span>
-        ) : (
-          <span className="font-word text-2xl text-pen">
-            {trace.result}{' '}
-            <span className="font-ui text-sm text-pencil">— {copy.notFound}</span>
-          </span>
-        )}
-      </section>
+      <Legenda copy={copy} />
 
       {trace.ambiguity && (
         <AmbiguityNote ambiguity={trace.ambiguity} copy={copy} locale={locale} />
       )}
 
-      <Comparison locale={locale} />
-
       <section>
-        <div className="flex items-center justify-between gap-4 pb-2">
-          <h2 className="font-ui text-sm text-pencil">
-            {copy.stepsLabel} ({trace.steps.length})
-          </h2>
-          <div className="flex items-center gap-2 font-ui text-xs">
+        <div className="flex flex-wrap items-end justify-between gap-4 pb-3">
+          <div>
+            <h2 className="font-prose text-base font-semibold">
+              {copy.stepsLabel}{' '}
+              <span className="font-word text-sm font-normal text-pencil">
+                ({trace.steps.length})
+              </span>
+            </h2>
+            <p className="mt-0.5 font-ui text-xs text-pencil">{copy.stepsHint}</p>
+          </div>
+
+          {/* Every control is labelled. The bare glyphs were silent to a screen
+              reader and ambiguous to everyone else. */}
+          <div className="flex items-center gap-1.5 font-ui text-xs">
             <button
-              className="border border-ruleLine px-2 py-1 disabled:opacity-40"
+              className="tombol px-2 py-1"
               onClick={() => step(1)}
               disabled={visible <= 1}
+              aria-label={copy.player.first}
+              title={copy.player.first}
             >
               ⏮
             </button>
             <button
-              className="border border-ruleLine px-2 py-1 disabled:opacity-40"
+              className="tombol px-2 py-1"
               onClick={() => step(Math.max(1, visible - 1))}
               disabled={visible <= 1}
+              aria-label={copy.player.prev}
+              title={copy.player.prev}
             >
               ←
             </button>
             <button
-              className="border border-ruleLine px-2 py-1"
+              className="tombol px-2 py-1"
               onClick={() => {
                 if (playing) return setPlaying(false)
                 if (atEnd) setVisible(1)
                 setPlaying(true)
               }}
-              title={locale === 'en' ? 'play the trace' : 'putar jejaknya'}
+              aria-label={playing ? copy.player.pause : copy.player.play}
+              title={playing ? copy.player.pause : copy.player.play}
             >
               {playing ? '❙❙' : '▶'}
             </button>
-            <span className="w-16 text-center text-pencil">
+            <span
+              className="w-14 text-center font-word text-pencil"
+              aria-label={`${copy.player.progress} ${visible}/${trace.steps.length}`}
+            >
               {visible}/{trace.steps.length}
             </span>
             <button
-              className="border border-ruleLine px-2 py-1 disabled:opacity-40"
+              className="tombol px-2 py-1"
               onClick={() => step(Math.min(trace.steps.length, visible + 1))}
               disabled={atEnd}
+              aria-label={copy.player.next}
+              title={copy.player.next}
             >
               →
             </button>
             <button
-              className="border border-ruleLine px-2 py-1 disabled:opacity-40"
+              className="tombol px-2 py-1"
               onClick={() => step(trace.steps.length)}
               disabled={atEnd}
+              aria-label={copy.player.last}
+              title={copy.player.last}
             >
               ⏭
             </button>
           </div>
         </div>
 
-        <StepList
-          trace={trace}
-          copy={copy}
-          locale={locale}
-          visible={visible}
-          onHover={step}
-        />
+        {/* How far through the trace we are, as a rule that fills. */}
+        <div
+          className="h-0.5 w-full bg-ruleLine/50"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={trace.steps.length}
+          aria-valuenow={visible}
+          aria-label={copy.player.progress}
+        >
+          <div
+            className="h-full bg-pen transition-[width] duration-300"
+            style={{
+              width: trace.steps.length ? `${(visible / trace.steps.length) * 100}%` : '0%',
+            }}
+          />
+        </div>
+
+        <StepList trace={trace} copy={copy} locale={locale} visible={visible} onHover={step} />
       </section>
+
+      <Comparison locale={locale} />
     </div>
   )
 }

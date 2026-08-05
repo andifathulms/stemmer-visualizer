@@ -48,13 +48,20 @@ function StepRow({
 
   return (
     <li
-      className={`baris flex gap-3 py-2 ${active ? 'bg-highlight/10' : ''}`}
+      className={`baris flex gap-3 py-2.5 transition-colors ${
+        active ? 'bg-highlight/15' : 'hover:bg-paperEdge/70'
+      }`}
       // Depth of prefix iteration, as indentation. Abandoned branches are
       // indented and struck through rather than hidden.
       style={{ paddingLeft: `${Math.min(step.iterasi, 3) * 1.25}rem` }}
       onMouseEnter={onSelect}
+      // Reachable by keyboard: stepping the trace with the arrow buttons and
+      // scrubbing it by pointer were the only two ways in, and the second was
+      // mouse-only.
+      tabIndex={0}
+      onFocus={onSelect}
     >
-      <span className="w-6 shrink-0 pt-0.5 text-right font-word text-xs text-pencil">
+      <span className="w-6 shrink-0 pt-0.5 text-right font-word text-xs tabular-nums text-pencil">
         {step.index + 1}
       </span>
 
