@@ -5,7 +5,9 @@ import { rulesOfType } from '@/lib/rules/loader'
 import { checkForbidden } from './forbidden'
 import { determinePrefix } from './prefixType'
 import { normalize } from './text'
+import { enumerate } from './enumerate'
 import type {
+  Ambiguity,
   ForbiddenStep,
   LookupStep,
   RemovalStep,
@@ -253,42 +255,95 @@ function stripInflectional(
   return { kata: current, found: false, removed }
 }
 
+/**
+ * Why this root and not one of the others.
+ *
+ * Invariant 7: ambiguity is reported, never silently resolved, and a `chosen`
+ * without a `reason` is a bug. The alternatives come from the other traversal
+ * — interpret depends on enumerate, never the reverse.
+ */
+function describeAmbiguity(
+  result: string,
+  found: boolean,
+  kata: string,
+  steps: readonly TraceStep[],
+  pack: RulePack,
+  dictionary: Dictionary,
+): Ambiguity | null {
+  const { candidates } = enumerate({ word: kata, pack, dictionary })
+  if (candidates.length < 2) return null
+
+  if (found && result === kata) {
+    return {
+      chosen: result,
+      reasonCode: 'kata-ada-di-kamus',
+      reason:
+        'Kata utuh sudah ada di kamus, jadi algoritma berhenti di langkah pertama dan tidak pernah mencoba membuang imbuhan.',
+      alternatives: candidates,
+    }
+  }
+
+  const decisive = [...steps]
+    .reverse()
+    .find((step): step is RemovalStep => step.type === 'buang' && !step.abandoned)
+
+  if (decisive && decisive.totalReadings > 1) {
+    return {
+      chosen: result,
+      reasonCode: 'bacaan-pertama',
+      reason: `Aturan ${decisive.ruleId} punya ${decisive.totalReadings} bacaan; bacaan ke-${decisive.readingIndex + 1} adalah yang pertama menemui kata dasar di kamus.`,
+      alternatives: candidates,
+    }
+  }
+
+  return {
+    chosen: result,
+    reasonCode: 'urutan-aturan',
+    reason:
+      'Jalur ini yang lebih dahulu dalam urutan aturan, dan kata dasarnya ada di kamus. Kemungkinan lain tidak pernah dicoba.',
+    alternatives: candidates,
+  }
+}
+
 export function interpret({ word, pack, dictionary }: InterpretInput): StemTrace {
   const kata = normalize(word)
   const recorder = new Recorder()
   const search: Search = { pack, dictionary, recorder }
 
-  const base = {
+  const finish = (result: string, found: boolean): StemTrace => ({
     input: word,
     kata,
     variant: pack.id,
     dictionaryId: dictionary.id,
-    ambiguity: null,
-  } as const
+    steps: recorder.steps,
+    result,
+    found,
+    ambiguity: describeAmbiguity(result, found, kata, recorder.steps, pack, dictionary),
+  })
 
   // 1. Dictionary lookup. Found → it's a root, stop.
   if (recorder.lookup(kata, dictionary, 0)) {
     recorder.stop('ditemukan-di-kamus', kata, 0)
-    return { ...base, steps: recorder.steps, result: kata, found: true }
+    return finish(kata, true)
   }
 
   // 2. Inflectional suffixes.
   const inflectional = stripInflectional(search, kata)
   if (inflectional.found) {
     recorder.stop('ditemukan-di-kamus', inflectional.kata, 0)
-    return { ...base, steps: recorder.steps, result: inflectional.kata, found: true }
+    return finish(inflectional.kata, true)
   }
 
   // 3-5. Derivational suffixes, then prefixes, with backtracking and recoding.
   const result = stripDerivational(search, inflectional.kata, inflectional.removed)
   if (result !== null) {
     recorder.stop('ditemukan-di-kamus', result, 0)
-    return { ...base, steps: recorder.steps, result, found: true }
+    return finish(result, true)
   }
 
   // 6. Give up gracefully: the original word, unchanged. Everything tried on
   // the way is abandoned, and all of it stays in the trace.
   recorder.abandonFrom(0)
   recorder.stop('tidak-ada-aturan-yang-cocok', kata, 0)
-  return { ...base, steps: recorder.steps, result: kata, found: false }
+  return finish(kata, false)
 }
