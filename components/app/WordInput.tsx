@@ -21,7 +21,8 @@ import type { Copy, Locale } from '@/lib/i18n'
  *   hardcoded in Indonesian regardless of locale.
  */
 export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
-  const { state, setKata, pack, packs, setVarian, dictionary, baseDictionary } = useKupas()
+  const { state, setKata, pack, packs, setVarian, dictionary, baseDictionary, dictionaryLoading } =
+    useKupas()
   const [draft, setDraft] = useState(state.kata)
 
   useEffect(() => setDraft(state.kata), [state.kata])
@@ -100,6 +101,11 @@ export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
             dictionary.size.toLocaleString(locale === 'id' ? 'id-ID' : 'en-GB'),
           )}
         </Link>
+        {dictionaryLoading && (
+          // The count is about to change on its own — say so rather than
+          // letting it triple silently. See KupasProvider.
+          <span className="ml-2 text-pencil">· {copy.dictionaryLoading}</span>
+        )}
         {edited && (
           <span className="ml-2 rounded-sm bg-highlight/40 px-1.5 py-0.5 text-pen">
             {copy.dictionaryEdited}

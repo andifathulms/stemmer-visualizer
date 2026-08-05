@@ -126,6 +126,7 @@ export interface Copy {
    *  crosses the server/client boundary and functions do not serialise. */
   readonly dictionaryCount: string
   readonly dictionaryEdited: string
+  readonly dictionaryLoading: string
 
   readonly disclaimer: string
   readonly unverifiedRule: string
@@ -259,6 +260,7 @@ const id: Copy = {
 
   dictionaryCount: '{n} kata dasar di kamus',
   dictionaryEdited: 'disunting',
+  dictionaryLoading: 'memuat kamus lengkap…',
 
   disclaimer:
     'Proyek belajar pribadi yang mengikuti makalah aslinya. Bukan Sastrawi, dan tidak mengklaim hasil yang sama dengan Sastrawi.',
@@ -397,6 +399,7 @@ const en: Copy = {
 
   dictionaryCount: '{n} roots in the dictionary',
   dictionaryEdited: 'edited',
+  dictionaryLoading: 'loading the full dictionary…',
 
   disclaimer:
     'A personal educational project implementing the published papers. Not Sastrawi, and no parity with Sastrawi is claimed.',

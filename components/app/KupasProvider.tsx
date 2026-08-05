@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { loadBaseDictionary } from '@/lib/dictionary/base'
+import { loadCuratedDictionary, loadFullDictionary } from '@/lib/dictionary/base'
 import type { Dictionary } from '@/lib/dictionary'
 import { parseRulePack } from '@/lib/rules/loader'
 import type { RulePack } from '@/lib/rules/schema'
@@ -31,6 +31,8 @@ interface KupasContextValue {
   readonly packs: readonly RulePack[]
   readonly dictionary: Dictionary
   readonly baseDictionary: Dictionary
+  /** True until the full root list's chunk has arrived. */
+  readonly dictionaryLoading: boolean
   readonly trace: StemTrace
   readonly tree: CandidateTree
   setKata(kata: string): void
@@ -61,7 +63,40 @@ export function KupasProvider({ children }: { children: React.ReactNode }) {
     window.history.replaceState(null, '', encodeState(next))
   }, [])
 
-  const baseDictionary = useMemo(() => loadBaseDictionary(), [])
+  /**
+   * The dictionary arrives in two stages, and the provider's shape does not
+   * change between them — every consumer keeps a real `Dictionary` at all
+   * times, so nothing downstream has to handle a null.
+   *
+   * The 293-word curated list is static and free, so the trace renders on the
+   * first paint instead of behind a spinner. The ~30,000-word list is a
+   * separate chunk (see lib/dictionary/base.ts) and replaces it when it lands,
+   * which for a handful of words changes the answer under the reader. That is
+   * why WordInput says the full dictionary is still loading rather than
+   * letting the number quietly triple.
+   */
+  const curated = useMemo(() => loadCuratedDictionary(), [])
+  const [full, setFull] = useState<Dictionary | null>(null)
+
+  useEffect(() => {
+    let live = true
+    loadFullDictionary().then(
+      (dictionary) => {
+        if (live) setFull(dictionary)
+      },
+      () => {
+        // The chunk failed. The curated list is a working dictionary, so the
+        // app stays usable and simply stems less — far better than an error
+        // screen for a tool whose whole subject is what the dictionary buys.
+        if (live) setFull(null)
+      },
+    )
+    return () => {
+      live = false
+    }
+  }, [])
+
+  const baseDictionary = full ?? curated
 
   const dictionary = useMemo(() => {
     let d = baseDictionary
@@ -86,6 +121,7 @@ export function KupasProvider({ children }: { children: React.ReactNode }) {
     packs: Object.values(PACKS),
     dictionary,
     baseDictionary,
+    dictionaryLoading: full === null,
     trace,
     tree,
     setKata: (kata) => update({ ...state, kata }),

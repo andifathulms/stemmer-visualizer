@@ -4,7 +4,7 @@ import { LOCALES, getCopy, isLocale, type SectionKey } from '@/lib/i18n'
 import { Peragaan } from '@/components/home/Peragaan'
 import { interpret } from '@/lib/engine/interpret'
 import { parseRulePack } from '@/lib/rules/loader'
-import { loadBaseDictionary } from '@/lib/dictionary/base'
+import { loadFullDictionarySync } from '@/lib/dictionary/full'
 import { segmentAt } from '@/lib/app/segmentation'
 import na96 from '@/data/rules/na96.json'
 
@@ -62,7 +62,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
   const trace = interpret({
     word: CONTOH_BERANDA,
     pack,
-    dictionary: loadBaseDictionary(),
+    dictionary: loadFullDictionarySync(),
   })
   const segmentation = segmentAt(trace, trace.steps.length)
 
