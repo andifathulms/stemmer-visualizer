@@ -1,0 +1,116 @@
+{
+  "note": "Worked examples. Each carries the source it is claimed to come from and whether that claim has been checked. Entries with verification: \"unverified\" were written from the widely-reproduced form of the algorithm, not transcribed from the paper, and must be re-checked before anyone cites them. See data/rules/GAPS.md.",
+  "cases": [
+    {
+      "kata": "menyapu",
+      "kataDasar": "sapu",
+      "citation": { "source": "asian2005", "locus": "aturan 18 — peluruhan s menjadi ny" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "memukul",
+      "kataDasar": "pukul",
+      "citation": { "source": "asian2005", "locus": "aturan 13 — peluruhan p menjadi m" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "menulis",
+      "kataDasar": "tulis",
+      "citation": { "source": "asian2005", "locus": "aturan 15 — peluruhan t menjadi n" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "mengupas",
+      "kataDasar": "upas",
+      "citation": { "source": "asian2005", "locus": "aturan 17" },
+      "verification": "unverified",
+      "catatan": "Ambigu: kupas juga sah. Algoritma mengambil bacaan pertama."
+    },
+    {
+      "kata": "menghitung",
+      "kataDasar": "hitung",
+      "citation": { "source": "asian2005", "locus": "aturan 16" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "membaca",
+      "kataDasar": "baca",
+      "citation": { "source": "asian2005", "locus": "aturan 11" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "melihat",
+      "kataDasar": "lihat",
+      "citation": { "source": "asian2005", "locus": "aturan 10" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "belajar",
+      "kataDasar": "ajar",
+      "citation": { "source": "asian2005", "locus": "aturan 4" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "pelajar",
+      "kataDasar": "ajar",
+      "citation": { "source": "asian2005", "locus": "aturan 31, pengecualian" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "penulis",
+      "kataDasar": "tulis",
+      "citation": { "source": "asian2005", "locus": "aturan 27" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "penyapu",
+      "kataDasar": "sapu",
+      "citation": { "source": "asian2005", "locus": "aturan 30" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "pembacaan",
+      "kataDasar": "baca",
+      "citation": { "source": "nazief1996", "locus": "langkah 3 dan 4 — konfiks pe-/-an" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "perusakan",
+      "kataDasar": "rusak",
+      "citation": { "source": "asian2005", "locus": "aturan 21" },
+      "verification": "unverified",
+      "catatan": "Menuntut backtrack: -kan dicoba lebih dahulu dan dibatalkan."
+    },
+    {
+      "kata": "mempelajari",
+      "kataDasar": "ajar",
+      "citation": { "source": "asian2005", "locus": "aturan 12 lalu aturan 31" },
+      "verification": "unverified",
+      "catatan": "Dua iterasi awalan."
+    },
+    {
+      "kata": "dibaca",
+      "kataDasar": "baca",
+      "citation": { "source": "nazief1996", "locus": "langkah 4 — awalan sederhana" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "duduklah",
+      "kataDasar": "duduk",
+      "citation": { "source": "nazief1996", "locus": "langkah 2 — partikel" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "bukunya",
+      "kataDasar": "buku",
+      "citation": { "source": "nazief1996", "locus": "langkah 2 — kata ganti milik" },
+      "verification": "unverified"
+    },
+    {
+      "kata": "tanami",
+      "kataDasar": "tanam",
+      "citation": { "source": "nazief1996", "locus": "langkah 3 — akhiran -i" },
+      "verification": "unverified"
+    }
+  ]
+}
