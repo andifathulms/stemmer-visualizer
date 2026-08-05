@@ -85,8 +85,8 @@ export function RuleReference({
   return (
     <div className="space-y-8">
       <header className="max-w-2xl space-y-2">
-        <h1 className="font-word text-2xl">{copy.nav.aturan}</h1>
-        <p className="text-sm leading-relaxed">
+        <h1>{copy.nav.aturan}</h1>
+        <p className="mt-3 max-w-baca leading-relaxed">
           {locale === 'en' ? pack.description : pack.deskripsi}
         </p>
         {unverified > 0 && (

@@ -38,8 +38,8 @@ export function DictionaryPanel({ copy, locale }: { copy: Copy; locale: Locale }
   return (
     <div className="space-y-6">
       <header className="max-w-2xl space-y-2">
-        <h1 className="font-word text-2xl">{copy.nav.kamus}</h1>
-        <p className="text-sm leading-relaxed">
+        <h1>{copy.nav.kamus}</h1>
+        <p className="mt-3 max-w-baca leading-relaxed">
           {locale === 'en' ? dictionary.coverage : dictionary.cakupan}
         </p>
         <p className="font-ui text-xs text-pencil">
