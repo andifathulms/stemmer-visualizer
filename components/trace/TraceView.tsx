@@ -6,6 +6,7 @@ import { Kata } from '@/components/word/Kata'
 import { StepList } from './StepList'
 import { WordInput } from '@/components/app/WordInput'
 import { AmbiguityNote } from './AmbiguityNote'
+import { Comparison } from './Comparison'
 import { segmentAt } from '@/lib/app/segmentation'
 import type { Copy, Locale } from '@/lib/i18n'
 
@@ -50,6 +51,8 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
       {trace.ambiguity && (
         <AmbiguityNote ambiguity={trace.ambiguity} copy={copy} locale={locale} />
       )}
+
+      <Comparison copy={copy} locale={locale} />
 
       <section>
         <div className="flex items-center justify-between gap-4 pb-2">
