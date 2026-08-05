@@ -9,9 +9,14 @@ export function parseRulePack(raw: unknown): RulePack {
   return rulePackSchema.parse(raw)
 }
 
-/** Rules of one type, in precedence order. */
-export function rulesOfType(pack: RulePack, type: RuleType): Rule[] {
-  return pack.rules.filter((rule) => rule.type === type).sort((a, b) => a.precedence - b.precedence)
+/** Rules of one type, in precedence order, narrowed to that type. */
+export function rulesOfType<T extends RuleType>(
+  pack: RulePack,
+  type: T,
+): Extract<Rule, { type: T }>[] {
+  return pack.rules
+    .filter((rule): rule is Extract<Rule, { type: T }> => rule.type === type)
+    .sort((a, b) => a.precedence - b.precedence)
 }
 
 export function ruleById(pack: RulePack, id: string): Rule | undefined {
