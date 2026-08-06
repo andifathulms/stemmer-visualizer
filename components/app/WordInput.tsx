@@ -52,7 +52,7 @@ export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
         <label className="flex-1 basis-64">
           <span className="label block">{copy.wordLabel}</span>
           <input
-            className="mt-1.5 w-full rounded-sm border border-ruleLine bg-paper px-3 py-2 font-word text-2xl text-pen outline-none transition-colors placeholder:text-pencilMark/70 focus:border-pen"
+            className="mt-1.5 h-14 w-full rounded-sm border border-ruleLine bg-paper px-3 font-word text-2xl text-pen outline-none transition-colors placeholder:text-pencilMark/70 focus:border-pen"
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
             placeholder={copy.wordPlaceholder}
@@ -66,7 +66,7 @@ export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
           <label>
             <span className="label block">{copy.variantLabel}</span>
             <select
-              className="mt-1.5 rounded-sm border border-ruleLine bg-paper px-2 py-2.5 font-ui text-sm outline-none focus:border-pen"
+              className="mt-1.5 h-14 rounded-sm border border-ruleLine bg-paper px-2 font-ui text-sm outline-none focus:border-pen"
               value={pack.id}
               onChange={(event) => setVarian(event.target.value)}
             >
@@ -81,7 +81,7 @@ export function WordInput({ copy, locale }: { copy: Copy; locale: Locale }) {
 
         {/* No arrow: it read as navigation, and next to a nav item of the same
             name on the Kandidat page it looked like a link to the trace. */}
-        <button className="tombol-utama py-2.5" disabled={!bisaKupas}>
+        <button className="tombol-utama h-14 px-5" disabled={!bisaKupas}>
           {copy.wordSubmit}
         </button>
       </form>
