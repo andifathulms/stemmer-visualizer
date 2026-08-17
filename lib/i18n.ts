@@ -114,6 +114,14 @@ export interface Copy {
   readonly lookupHit: string
   readonly lookupMiss: string
 
+  /** `PohonPelusuran`, the drawn search tree — DESIGN-REWORK.md §2. */
+  readonly pohon: {
+    readonly title: string
+    /** `{n}` and `{total}` are replaced with counts. */
+    readonly capped: string
+    readonly ambiguityLabel: string
+  }
+
   readonly player: {
     readonly first: string
     readonly prev: string
@@ -250,6 +258,12 @@ const id: Copy = {
   lookup: 'Cek kamus',
   lookupHit: 'ada di kamus',
   lookupMiss: 'tidak ada di kamus',
+
+  pohon: {
+    title: 'Pohon pencarian',
+    capped: 'Menampilkan {n} dari {total} kemungkinan — jalur algoritma, dan satu tingkat di sekitarnya.',
+    ambiguityLabel: 'kata dasar yang sama-sama sah',
+  },
 
   player: {
     first: 'Ke langkah pertama',
@@ -390,6 +404,12 @@ const en: Copy = {
   lookup: 'Dictionary lookup',
   lookupHit: 'in dictionary',
   lookupMiss: 'not in dictionary',
+
+  pohon: {
+    title: 'Search tree',
+    capped: 'Showing {n} of {total} possibilities — the algorithm’s path, and one level around it.',
+    ambiguityLabel: 'equally valid roots',
+  },
 
   player: {
     first: 'Go to the first step',
