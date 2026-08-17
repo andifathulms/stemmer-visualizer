@@ -32,8 +32,19 @@ import type { Copy, Locale } from '@/lib/i18n'
  * screen-reader route — DESIGN-REWORK.md §2.3.
  */
 
-const ROW_HEIGHT = 44
-const PAD = 24
+/**
+ * A parent node sits at the *mean* slot of its children (`layoutPohon`), so
+ * for the common case of exactly two children it lands exactly halfway
+ * between them — which puts every edge's own vertical midpoint only a
+ * quarter of a row away from the parent, not half. A label centred there
+ * needs roughly ±9px of clearance from the parent's own text on one side and
+ * the child's on the other, plus its own ~16px height: about 46px of clear
+ * room. 96 gives that with margin in the tightest (two-children) case; a
+ * smaller row height put the label on top of the word above it, which is
+ * exactly the bug this constant exists to not have.
+ */
+const ROW_HEIGHT = 96
+const PAD = 44
 const EDGE_LABEL_WIDTH = 110
 const EDGE_LABEL_HEIGHT = 16
 /** Rough monospace advance for `font-word text-sm` (Geist Mono, 14px). Used
@@ -205,9 +216,14 @@ function Edge({
         style={{ opacity }}
       />
       {node.ruleId && (node.onPath || mode === 'setara') && (
+        // Centred on the edge's own midpoint, not offset toward either end —
+        // an offset in a fixed direction is toward the parent for one child
+        // and away from it for another (whichever side of the parent's mean
+        // slot they fall on), so it collides with one of them depending on
+        // shape. ROW_HEIGHT is sized so the centred position clears both.
         <foreignObject
           x={mid.x - EDGE_LABEL_WIDTH / 2}
-          y={mid.y - EDGE_LABEL_HEIGHT - 10}
+          y={mid.y - EDGE_LABEL_HEIGHT / 2}
           width={EDGE_LABEL_WIDTH}
           height={EDGE_LABEL_HEIGHT}
         >
