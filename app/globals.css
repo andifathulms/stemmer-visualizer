@@ -125,11 +125,27 @@
   }
 }
 
+/*
+ * DESIGN-REWORK.md §6: this used to zero every `animation-duration` and
+ * `transition-duration` on `*`, which silenced the peeling — the one
+ * orchestrated moment PRD §8 describes — but also every incidental hover
+ * colour change app-wide. A colour change on hover is not motion, so
+ * `transition-colors` (every `.tombol`, every nav link, every hover state in
+ * the app) is left out on purpose and keeps its ordinary duration. Scoped
+ * instead to the four named keyframes and to the transform/opacity/width
+ * transitions the peeling and the step-progress bar actually use.
+ */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .animate-lepas-awalan,
+  .animate-lepas-akhiran,
+  .animate-kilat-kamus,
+  .animate-kembali {
     animation-duration: 0.001ms !important;
+  }
+
+  [class~='transition-transform'],
+  [class~='transition-opacity'],
+  [class~='transition-[width]'] {
     transition-duration: 0.001ms !important;
   }
 }
