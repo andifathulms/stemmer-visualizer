@@ -92,8 +92,16 @@ export function RuleReference({
         {unverified > 0 && (
           <p className="border-l-2 border-ruleLine pl-3 font-ui text-xs leading-relaxed text-pencil">
             {locale === 'en'
-              ? `${unverified} of ${pack.rules.length} rules have not been checked against the source paper. Their citation says where to look, not that anybody has looked. Do not cite them as sourced.`
-              : `${unverified} dari ${pack.rules.length} aturan belum diperiksa terhadap makalah sumber. Sitasinya menunjukkan tempat memeriksa, bukan bahwa sudah ada yang memeriksa. Jangan dikutip sebagai bersumber.`}
+              ? `${unverified} of ${pack.rules.length} rules have not been checked against the source paper. Their citation says where to look, not that anybody has looked. Do not cite them as sourced. `
+              : `${unverified} dari ${pack.rules.length} aturan belum diperiksa terhadap makalah sumber. Sitasinya menunjukkan tempat memeriksa, bukan bahwa sudah ada yang memeriksa. Jangan dikutip sebagai bersumber. `}
+            <a
+              className="text-pen underline decoration-ruleLine underline-offset-4 hover:decoration-pen"
+              href="https://github.com/andifathulms/stemmer-visualizer/blob/main/data/rules/GAPS.md"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              {locale === 'en' ? 'What is checked and in what order (GAPS.md)' : 'Apa yang sudah diperiksa dan urutannya (GAPS.md)'} ↗
+            </a>
           </p>
         )}
       </header>
