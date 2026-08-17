@@ -10,6 +10,8 @@ import { Comparison } from './Comparison'
 import { Legenda } from '@/components/Legenda'
 import { KegagalanNote } from './KegagalanNote'
 import { Istilah } from '@/components/Istilah'
+import { PohonPelusuran } from '@/components/tree/PohonPelusuran'
+import { buildPohon } from '@/lib/tree/pohon'
 import { segmentAt } from '@/lib/app/segmentation'
 import { jelaskanKegagalan } from '@/lib/app/kegagalan'
 import type { Copy, Locale } from '@/lib/i18n'
@@ -31,7 +33,7 @@ import type { Copy, Locale } from '@/lib/i18n'
 const ISTILAH = ['awalan', 'akhiran', 'kataDasar', 'peluruhan', 'konfiks'] as const
 
 export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
-  const { trace } = useKupas()
+  const { trace, tree } = useKupas()
   const [visible, setVisible] = useState(trace.steps.length)
   const [playing, setPlaying] = useState(false)
 
@@ -43,6 +45,23 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
   const segmentation = useMemo(() => segmentAt(trace, visible), [trace, visible])
   const kegagalan = useMemo(() => jelaskanKegagalan(trace), [trace])
   const atEnd = visible >= trace.steps.length
+
+  // The same tree PohonPelusuran draws, computed once here so the step
+  // player's cursor (`visible`) and the tree's highlighted node are the same
+  // fact, expressed two ways — DESIGN-REWORK.md §2.2/§2.3.
+  const pohon = useMemo(() => buildPohon(trace, tree), [trace, tree])
+  const activeNodeId =
+    visible > 0 ? (pohon.positionAfterStep[visible - 1] ?? pohon.root.id) : pohon.root.id
+
+  // Hovering a tree node scrubs the player to the latest step that left the
+  // search standing on that node — the reverse of the highlight above.
+  const stepForNode = (nodeId: string): number => {
+    if (nodeId === pohon.root.id) return 1
+    for (let i = pohon.positionAfterStep.length - 1; i >= 0; i -= 1) {
+      if (pohon.positionAfterStep[i] === nodeId) return i + 1
+    }
+    return visible
+  }
 
   /**
    * What the step now on screen did, so the word can act it out — PRD §8. An
@@ -212,6 +231,21 @@ export function TraceView({ copy, locale }: { copy: Copy; locale: Locale }) {
             style={{
               width: trace.steps.length ? `${(visible / trace.steps.length) * 100}%` : '0%',
             }}
+          />
+        </div>
+
+        {/* The drawn search tree — DESIGN-REWORK.md §2. The precedence path
+            at full weight, every other branch faint but present ("jalur"
+            mode); the step player above and this share one cursor. */}
+        <div className="mt-4">
+          <PohonPelusuran
+            trace={trace}
+            tree={tree}
+            mode="jalur"
+            copy={copy}
+            locale={locale}
+            activeNodeId={activeNodeId}
+            onHoverNode={(nodeId) => step(stepForNode(nodeId))}
           />
         </div>
 

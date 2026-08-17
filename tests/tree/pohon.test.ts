@@ -42,6 +42,20 @@ describe('buildPohon — soundness with the two traversals it joins', () => {
   })
 })
 
+describe('positionAfterStep — the same cursor the step player already uses', () => {
+  it('is index-aligned with trace.steps and lands on the result node at the end', () => {
+    const { trace, pohon } = pohonFor('berjalan')
+    expect(pohon.positionAfterStep).toHaveLength(trace.steps.length)
+    expect(pohon.positionAfterStep.at(-1)).toBe(pohon.resultNodeId)
+  })
+
+  it('every position it names is a real, onPath node', () => {
+    const { pohon } = pohonFor('memukul')
+    const onPathIds = new Set(flattenPohon(pohon.root).filter((n) => n.onPath).map((n) => n.id))
+    for (const id of pohon.positionAfterStep) expect(onPathIds.has(id)).toBe(true)
+  })
+})
+
 describe('a single clean path — makanan', () => {
   const { trace, pohon } = pohonFor('makanan')
 

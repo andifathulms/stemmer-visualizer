@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useKupas } from '@/components/app/KupasProvider'
 import { WordInput } from '@/components/app/WordInput'
+import { PohonPelusuran } from '@/components/tree/PohonPelusuran'
 import type { CandidateNode } from '@/lib/engine/enumerate'
 import type { Copy, Locale } from '@/lib/i18n'
 
@@ -152,6 +153,17 @@ export function CandidateTreeView({ copy, locale }: { copy: Copy; locale: Locale
             {copy.ambiguousLead}
           </p>
         )}
+      </section>
+
+      {/* The drawn search tree, at equal weight — DESIGN-REWORK.md §2.2:
+          "its job is to make the size of the search obvious." The path is
+          still marked (heavier line, the result in teacher red), but every
+          branch draws at the same weight, unlike /kupas's "jalur" mode. */}
+      <section>
+        <h2 className="font-ui text-sm text-pencil">{copy.pohon.title}</h2>
+        <div className="mt-2">
+          <PohonPelusuran trace={trace} tree={tree} mode="setara" copy={copy} locale={locale} />
+        </div>
       </section>
 
       <section>

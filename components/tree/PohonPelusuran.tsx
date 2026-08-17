@@ -22,11 +22,10 @@ import type { Copy, Locale } from '@/lib/i18n'
  * Deliberate scope note: nodes are `font-word` text, in the same pen/pencil
  * tone convention `Kata` uses for its morphemes, but they are not `<Kata>`
  * itself — `Kata` is sized and laid out for one hero word, not a multi-node
- * diagram, and embedding it in every node here has not been checked in a
- * real browser. That check belongs with the mobile-layout pass this
- * component still needs (see the module's test file and DESIGN-REWORK.md
- * §7 step 4) — this file is `PohonPelusuran` built and verified against its
- * fixtures, standalone, not yet wired into a route.
+ * diagram. And this component is still left-to-right only: DESIGN-REWORK.md
+ * §7 says to check it at 375px after wiring it into `/kupas` and expects a
+ * top-down rotation on narrow viewports, which has not been built or checked
+ * in a real browser yet. Both are flagged, not silently decided.
  *
  * `aria-hidden`: the tree is a second, visual rendering of exactly what
  * `StepList` already states in linear, accessible form. It is not the
@@ -58,12 +57,16 @@ function NodeLabel({
   node,
   point,
   isResult,
+  isActive,
   locale,
+  onHover,
 }: {
   node: DrawNode
   point: Point
   isResult: boolean
+  isActive: boolean
   locale: Locale
+  onHover?: (nodeId: string) => void
 }) {
   const isLeaf = node.children.length === 0
   const fill = isResult
@@ -73,14 +76,31 @@ function NodeLabel({
       : node.onPath
         ? 'fill-pen'
         : 'fill-pencil'
+  const boxWidth = String(node.kata).length * 8 + 8
 
   return (
-    <g>
+    <g onMouseEnter={onHover ? () => onHover(node.id) : undefined}>
+      {/* The step player's current position on the path — StepList and the
+          tree cross-highlight each other (DESIGN-REWORK.md §2.3). A ring
+          rather than a fill, so it never competes with the dictionary-hit
+          highlight or with teacher red. */}
+      {isActive && (
+        <rect
+          x={point.x - 6}
+          y={point.y - 14}
+          width={boxWidth + 4}
+          height={22}
+          rx={4}
+          fill="none"
+          className="stroke-pen"
+          strokeWidth={1.5}
+        />
+      )}
       {node.dictionaryValid && (
         <rect
           x={point.x - 4}
           y={point.y - 12}
-          width={String(node.kata).length * 8 + 8}
+          width={boxWidth}
           height={18}
           rx={3}
           className="fill-highlight/40"
@@ -186,9 +206,11 @@ function walk(
   depth: number,
   slotOf: Map<string, number>,
   resultNodeId: string | null,
+  activeNodeId: string | null | undefined,
   mode: 'jalur' | 'setara',
   copy: Copy,
   locale: Locale,
+  onHoverNode: ((nodeId: string) => void) | undefined,
   out: JSX.Element[],
 ): void {
   const slot = slotOf.get(node.id)
@@ -211,7 +233,7 @@ function walk(
         locale={locale}
       />,
     )
-    walk(child, depth + 1, slotOf, resultNodeId, mode, copy, locale, out)
+    walk(child, depth + 1, slotOf, resultNodeId, activeNodeId, mode, copy, locale, onHoverNode, out)
   }
 
   out.push(
@@ -220,7 +242,9 @@ function walk(
       node={node}
       point={point}
       isResult={node.id === resultNodeId}
+      isActive={node.id === activeNodeId}
       locale={locale}
+      onHover={onHoverNode}
     />,
   )
 }
@@ -267,12 +291,22 @@ export function PohonPelusuran({
   mode,
   copy,
   locale,
+  activeNodeId,
+  onHoverNode,
 }: {
   trace: StemTrace
   tree: CandidateTree
   mode: 'jalur' | 'setara'
   copy: Copy
   locale: Locale
+  /** The node the step player is currently standing on, if this tree is
+   *  wired to one — DESIGN-REWORK.md §2.2: "the step player scrubs along
+   *  the path, and the existing peeling animation plays on the node it is
+   *  currently at." Omit on `/kandidat`, which has no player. */
+  activeNodeId?: string | null
+  /** Hovering a tree node scrubs the step player to match — the reverse of
+   *  `activeNodeId`, per §2.3's "and the reverse." */
+  onHoverNode?: (nodeId: string) => void
 }) {
   const pohon = useMemo(() => buildPohon(trace, tree), [trace, tree])
   const selection = useMemo(() => selectForDrawing(pohon), [pohon])
@@ -288,7 +322,18 @@ export function PohonPelusuran({
   const height = PAD * 2 + (layout.maxSlot + 1) * ROW_HEIGHT
 
   const elements: JSX.Element[] = []
-  walk(selection.root, 0, slotOf, pohon.resultNodeId, mode, copy, locale, elements)
+  walk(
+    selection.root,
+    0,
+    slotOf,
+    pohon.resultNodeId,
+    activeNodeId,
+    mode,
+    copy,
+    locale,
+    onHoverNode,
+    elements,
+  )
 
   const dictionaryValidLeaves = layout.placed.filter(
     (p) => p.node.dictionaryValid && p.node.children.length === 0,

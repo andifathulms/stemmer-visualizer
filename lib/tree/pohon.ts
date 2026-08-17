@@ -44,6 +44,14 @@ export interface Pohon {
    *  tree corresponds to `trace.result`, which should not happen — soundness
    *  (invariant 6) says the result is always somewhere in here. */
   readonly resultNodeId: string | null
+  /**
+   * Index-aligned with `trace.steps`: `positionAfterStep[i]` is the id of the
+   * node the search was standing on once step `i` had happened. The step
+   * player already scrubs by "how many steps are visible" (`TraceView`'s
+   * `visible`); this is the same cursor, expressed as a tree position, so
+   * scrubbing the player and hovering a tree node can drive each other.
+   */
+  readonly positionAfterStep: readonly string[]
   readonly nodeCount: number
   readonly capped: boolean
   readonly maxNodes: number
@@ -82,6 +90,7 @@ export function buildPohon(trace: StemTrace, tree: CandidateTree): Pohon {
   // from an earlier word than the top of stack pops back to it first — that
   // pop is the reconstructed backtrack.
   const stack: Draft[] = [root]
+  const positionAfterStep: string[] = []
 
   function popTo(kata: string): Draft {
     while (stack.length > 1 && stack[stack.length - 1]!.kata !== kata) stack.pop()
@@ -92,7 +101,11 @@ export function buildPohon(trace: StemTrace, tree: CandidateTree): Pohon {
     if (step.type === 'buang') {
       const parent = popTo(step.dari)
       const child = findChild(parent, step.ruleId, step.readingIndex, step.ke)
-      if (!child) continue // defensive: soundness guarantees this exists
+      if (!child) {
+        // defensive: soundness guarantees this exists
+        positionAfterStep.push(stack[stack.length - 1]!.id)
+        continue
+      }
       child.onPath = true
       child.abandoned = step.abandoned
       stack.push(child)
@@ -108,6 +121,7 @@ export function buildPohon(trace: StemTrace, tree: CandidateTree): Pohon {
     }
     // 'berhenti' carries no tree position of its own — it reports why the
     // search at the current top-of-stack ended, which is already captured.
+    positionAfterStep.push(stack[stack.length - 1]!.id)
   }
 
   const resultNodeId = trace.found ? stack[stack.length - 1]!.id : root.id
@@ -115,6 +129,7 @@ export function buildPohon(trace: StemTrace, tree: CandidateTree): Pohon {
   return {
     root,
     resultNodeId,
+    positionAfterStep,
     nodeCount: tree.nodeCount,
     capped: tree.capped,
     maxNodes: tree.maxNodes,
