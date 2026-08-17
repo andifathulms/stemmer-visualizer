@@ -171,6 +171,7 @@ function NodeLabel({
 
 function Edge({
   from,
+  fromWord,
   to,
   colWidth,
   node,
@@ -180,6 +181,11 @@ function Edge({
   locale,
 }: {
   from: Point
+  /** The parent's own word — the curve has to start after it, not through
+   *  it. `from` is the *left* edge of that text (SVG's default text-anchor),
+   *  so starting a fixed few pixels from `from.x` cut straight across any
+   *  word longer than a couple of characters. */
+  fromWord: string
   to: Point
   colWidth: number
   node: DrawNode
@@ -200,13 +206,14 @@ function Edge({
   const opacity = node.onPath ? 1 : mode === 'jalur' ? 0.35 : 0.7
   const dash = node.abandoned ? '3 3' : undefined
 
-  const mid: Point = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 }
+  const startX = from.x + wordPx(fromWord) + 8
+  const mid: Point = { x: (startX + to.x) / 2, y: (from.y + to.y) / 2 }
   const reason = abandonReasonLabel(node, copy)
 
   return (
     <g>
       <path
-        d={`M ${from.x + 4} ${from.y - 4} C ${from.x + colWidth / 2} ${from.y - 4}, ${
+        d={`M ${startX} ${from.y - 4} C ${from.x + colWidth / 2} ${from.y - 4}, ${
           to.x - colWidth / 2
         } ${to.y - 4}, ${to.x - 8} ${to.y - 4}`}
         fill="none"
@@ -265,6 +272,7 @@ function walk(node: DrawNode, depth: number, ctx: WalkContext, out: JSX.Element[
       <Edge
         key={`edge-${child.id}`}
         from={point}
+        fromWord={node.kata}
         to={childPoint}
         colWidth={ctx.colWidth}
         node={child}
