@@ -32,19 +32,45 @@ import type { Copy, Locale } from '@/lib/i18n'
  * screen-reader route — DESIGN-REWORK.md §2.3.
  */
 
-const COL_WIDTH = 168
-const ROW_HEIGHT = 40
+const ROW_HEIGHT = 44
 const PAD = 24
-const EDGE_LABEL_WIDTH = 96
+const EDGE_LABEL_WIDTH = 110
 const EDGE_LABEL_HEIGHT = 16
+/** Rough monospace advance for `font-word text-sm` (Geist Mono, 14px). Used
+ *  only to size the layout with enough room, never to place text pixel-
+ *  perfectly — SVG measures its own text at paint time regardless. */
+const CHAR_WIDTH = 8.4
+const MIN_COL_WIDTH = 160
+
+function wordPx(word: string): number {
+  return word.length * CHAR_WIDTH
+}
 
 interface Point {
   readonly x: number
   readonly y: number
 }
 
-function toPoint(depth: number, slot: number): Point {
-  return { x: PAD + depth * COL_WIDTH, y: PAD + slot * ROW_HEIGHT }
+function toPoint(depth: number, slot: number, colWidth: number): Point {
+  return { x: PAD + depth * colWidth, y: PAD + slot * ROW_HEIGHT }
+}
+
+/**
+ * A fixed column width overlapped an edge's rule-id label with its own
+ * parent's word for anything longer than about six characters — the
+ * midpoint of a 168px column sits inside "meninggal"'s own text. The column
+ * width is sized from the tree's own content instead: wide enough that even
+ * the longest word in the drawing, sitting at a column's left edge, clears
+ * the label centred at the column's midpoint with room either side.
+ */
+function columnWidth(root: DrawNode): number {
+  let longestChars = 0
+  function walkWidth(node: DrawNode): void {
+    longestChars = Math.max(longestChars, node.kata.length)
+    node.children.forEach(walkWidth)
+  }
+  walkWidth(root)
+  return Math.max(MIN_COL_WIDTH, longestChars * CHAR_WIDTH * 2 + EDGE_LABEL_WIDTH + 40)
 }
 
 function abandonReasonLabel(node: PohonNode, copy: Copy): string | null {
@@ -76,7 +102,7 @@ function NodeLabel({
       : node.onPath
         ? 'fill-pen'
         : 'fill-pencil'
-  const boxWidth = String(node.kata).length * 8 + 8
+  const boxWidth = wordPx(node.kata) + 8
 
   return (
     <g onMouseEnter={onHover ? () => onHover(node.id) : undefined}>
@@ -119,11 +145,7 @@ function NodeLabel({
         </text>
       )}
       {node.hiddenSiblingCount > 0 && (
-        <text
-          x={point.x + String(node.kata).length * 8 + 10}
-          y={point.y}
-          className="font-ui text-[10px] fill-pencil"
-        >
+        <text x={point.x + wordPx(node.kata) + 10} y={point.y} className="font-ui text-[10px] fill-pencil">
           +{node.hiddenSiblingCount}
         </text>
       )}
@@ -139,6 +161,7 @@ function NodeLabel({
 function Edge({
   from,
   to,
+  colWidth,
   node,
   mode,
   isResultPath,
@@ -147,6 +170,7 @@ function Edge({
 }: {
   from: Point
   to: Point
+  colWidth: number
   node: DrawNode
   mode: 'jalur' | 'setara'
   isResultPath: boolean
@@ -171,8 +195,8 @@ function Edge({
   return (
     <g>
       <path
-        d={`M ${from.x + 4} ${from.y - 4} C ${from.x + COL_WIDTH / 2} ${from.y - 4}, ${
-          to.x - COL_WIDTH / 2
+        d={`M ${from.x + 4} ${from.y - 4} C ${from.x + colWidth / 2} ${from.y - 4}, ${
+          to.x - colWidth / 2
         } ${to.y - 4}, ${to.x - 8} ${to.y - 4}`}
         fill="none"
         className={strokeClass}
@@ -183,7 +207,7 @@ function Edge({
       {node.ruleId && (node.onPath || mode === 'setara') && (
         <foreignObject
           x={mid.x - EDGE_LABEL_WIDTH / 2}
-          y={mid.y - EDGE_LABEL_HEIGHT - 6}
+          y={mid.y - EDGE_LABEL_HEIGHT - 10}
           width={EDGE_LABEL_WIDTH}
           height={EDGE_LABEL_HEIGHT}
         >
@@ -201,39 +225,40 @@ function Edge({
   )
 }
 
-function walk(
-  node: DrawNode,
-  depth: number,
-  slotOf: Map<string, number>,
-  resultNodeId: string | null,
-  activeNodeId: string | null | undefined,
-  mode: 'jalur' | 'setara',
-  copy: Copy,
-  locale: Locale,
-  onHoverNode: ((nodeId: string) => void) | undefined,
-  out: JSX.Element[],
-): void {
-  const slot = slotOf.get(node.id)
+interface WalkContext {
+  readonly slotOf: Map<string, number>
+  readonly colWidth: number
+  readonly resultNodeId: string | null
+  readonly activeNodeId: string | null | undefined
+  readonly mode: 'jalur' | 'setara'
+  readonly copy: Copy
+  readonly locale: Locale
+  readonly onHoverNode: ((nodeId: string) => void) | undefined
+}
+
+function walk(node: DrawNode, depth: number, ctx: WalkContext, out: JSX.Element[]): void {
+  const slot = ctx.slotOf.get(node.id)
   if (slot === undefined) return
-  const point = toPoint(depth, slot)
+  const point = toPoint(depth, slot, ctx.colWidth)
 
   for (const child of node.children) {
-    const childSlot = slotOf.get(child.id)
+    const childSlot = ctx.slotOf.get(child.id)
     if (childSlot === undefined) continue
-    const childPoint = toPoint(depth + 1, childSlot)
+    const childPoint = toPoint(depth + 1, childSlot, ctx.colWidth)
     out.push(
       <Edge
         key={`edge-${child.id}`}
         from={point}
         to={childPoint}
+        colWidth={ctx.colWidth}
         node={child}
-        mode={mode}
-        isResultPath={child.id === resultNodeId}
-        copy={copy}
-        locale={locale}
+        mode={ctx.mode}
+        isResultPath={child.id === ctx.resultNodeId}
+        copy={ctx.copy}
+        locale={ctx.locale}
       />,
     )
-    walk(child, depth + 1, slotOf, resultNodeId, activeNodeId, mode, copy, locale, onHoverNode, out)
+    walk(child, depth + 1, ctx, out)
   }
 
   out.push(
@@ -241,10 +266,10 @@ function walk(
       key={`node-${node.id}`}
       node={node}
       point={point}
-      isResult={node.id === resultNodeId}
-      isActive={node.id === activeNodeId}
-      locale={locale}
-      onHover={onHoverNode}
+      isResult={node.id === ctx.resultNodeId}
+      isActive={node.id === ctx.activeNodeId}
+      locale={ctx.locale}
+      onHover={ctx.onHoverNode}
     />,
   )
 }
@@ -311,6 +336,7 @@ export function PohonPelusuran({
   const pohon = useMemo(() => buildPohon(trace, tree), [trace, tree])
   const selection = useMemo(() => selectForDrawing(pohon), [pohon])
   const layout = useMemo(() => layoutPohon(selection.root), [selection])
+  const colWidth = useMemo(() => columnWidth(selection.root), [selection])
 
   const slotOf = useMemo(() => {
     const map = new Map<string, number>()
@@ -318,29 +344,37 @@ export function PohonPelusuran({
     return map
   }, [layout])
 
-  const width = PAD * 2 + (layout.maxDepth + 1) * COL_WIDTH
+  const width = PAD * 2 + (layout.maxDepth + 1) * colWidth
   const height = PAD * 2 + (layout.maxSlot + 1) * ROW_HEIGHT
 
   const elements: JSX.Element[] = []
   walk(
     selection.root,
     0,
-    slotOf,
-    pohon.resultNodeId,
-    activeNodeId,
-    mode,
-    copy,
-    locale,
-    onHoverNode,
+    {
+      slotOf,
+      colWidth,
+      resultNodeId: pohon.resultNodeId,
+      activeNodeId,
+      mode,
+      copy,
+      locale,
+      onHoverNode,
+    },
     elements,
   )
 
   const dictionaryValidLeaves = layout.placed.filter(
     (p) => p.node.dictionaryValid && p.node.children.length === 0,
   )
-  const braceLeaves = dictionaryValidLeaves.map((p) => ({ point: toPoint(p.depth, p.slot) }))
+  const braceLeaves = dictionaryValidLeaves.map((p) => ({ point: toPoint(p.depth, p.slot, colWidth) }))
 
   return (
+    // No forced min-width here: a small tree stays small and left-aligned
+    // rather than being stretched to fill a wide panel, which used to
+    // magnify the whole drawing (text included) well past its intended size.
+    // overflow-x-auto still handles the case where the tree is wider than
+    // the panel.
     <div className="overflow-x-auto">
       <svg
         aria-hidden="true"
@@ -348,7 +382,6 @@ export function PohonPelusuran({
         width={width}
         height={Math.max(height, PAD * 2 + ROW_HEIGHT)}
         viewBox={`0 0 ${width} ${Math.max(height, PAD * 2 + ROW_HEIGHT)}`}
-        className="min-w-full"
       >
         <title>{copy.pohon.title}</title>
         {elements}
