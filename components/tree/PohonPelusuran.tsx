@@ -6,6 +6,7 @@ import type { StemTrace } from '@/lib/engine/trace'
 import type { CandidateTree } from '@/lib/engine/enumerate'
 import { buildPohon, type PohonNode } from '@/lib/tree/pohon'
 import { selectForDrawing, layoutPohon, type DrawNode } from '@/lib/tree/layout'
+import type { Rule } from '@/lib/rules/schema'
 import type { Copy, Locale } from '@/lib/i18n'
 
 /**
@@ -55,6 +56,19 @@ const MIN_COL_WIDTH = 160
 
 function wordPx(word: string): number {
   return word.length * CHAR_WIDTH
+}
+
+/**
+ * `na96.awalan.me.recode.men` reads as an address, not as something a
+ * visitor recognises — `StepList` never shows a bare rule id either, it
+ * leads with `rule.keterangan` and puts the id on a small, secondary link.
+ * An edge label has no room for a full sentence, so it shows the affix the
+ * rule actually removes instead — `me-`, `-kan` — which is the one thing a
+ * reader glancing at the tree wants first. The id stays as the link's href
+ * and its full text is still one hover away, in `title`.
+ */
+function affixLabel(rule: Rule): string {
+  return rule.type === 'awalan' ? rule.awalan : rule.akhiran
 }
 
 interface Point {
@@ -237,9 +251,9 @@ function Edge({
           <Link
             className="block truncate text-center font-word text-[10px] text-pencil underline decoration-ruleLine hover:text-pen"
             href={`/${locale}/aturan/#${node.ruleId}`}
-            title={reason ?? undefined}
+            title={`${node.ruleId}${reason ? ` — ${reason}` : ''}`}
           >
-            {node.ruleId}
+            {node.rule ? affixLabel(node.rule) : node.ruleId}
             {reason && node.abandoned ? ` — ${reason}` : ''}
           </Link>
         </foreignObject>
