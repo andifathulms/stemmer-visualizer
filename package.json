@@ -16,6 +16,7 @@
     "test:oracle": "vitest run tests/oracle",
     "test:properties": "vitest run tests/properties",
     "rules:validate": "tsx scripts/validate-rules.ts",
+    "contrast:check": "tsx scripts/check-contrast.ts",
     "fixtures:record": "tsx scripts/record-fixtures.ts",
     "dictionary:import": "tsx scripts/import-kata-dasar.ts",
     "typecheck": "tsc --noEmit",
