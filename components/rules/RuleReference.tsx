@@ -19,6 +19,56 @@ const GROUPS: ReadonlyArray<{ type: Rule['type']; id: string; en: string }> = [
   { type: 'awalan', id: 'Awalan derivasional', en: 'Derivational prefixes' },
 ]
 
+function rulesOfGroup(pack: RulePack, type: Rule['type']): Rule[] {
+  return pack.rules.filter((rule) => rule.type === type).sort((a, b) => a.precedence - b.precedence)
+}
+
+/**
+ * The four rule-type groups, as ordered pipeline stages — DESIGN-REWORK.md
+ * §3: invariant 1 exists so a linguist who doesn't code can audit the rule
+ * set, and the first question that reader asks is what fires before what.
+ * A "precedence 3" label on an individual card answers that only one rule
+ * at a time; this answers it for the whole pack at a glance.
+ */
+function Pipeline({ pack, locale }: { pack: RulePack; locale: Locale }) {
+  const stages = GROUPS.map((group) => ({ group, rules: rulesOfGroup(pack, group.type) })).filter(
+    (stage) => stage.rules.length > 0,
+  )
+
+  return (
+    <nav aria-label={locale === 'en' ? 'Rule pipeline' : 'Urutan tahap aturan'} className="overflow-x-auto">
+      <ol className="flex items-stretch gap-2">
+        {stages.map((stage, index) => (
+          <li key={stage.group.type} className="flex items-stretch gap-2">
+            <div className="min-w-[10rem] border border-ruleLine bg-paperEdge/50 p-3">
+              <h3 className="font-ui text-xs font-semibold uppercase tracking-wide text-pencil">
+                {index + 1}. {locale === 'en' ? stage.group.en : stage.group.id}
+              </h3>
+              <ul className="mt-2 space-y-0.5">
+                {stage.rules.map((rule) => (
+                  <li key={rule.id}>
+                    <a
+                      href={`#${rule.id}`}
+                      className="font-word text-xs text-pen underline decoration-ruleLine hover:decoration-pen"
+                    >
+                      {rule.id.split('.').pop()}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {index < stages.length - 1 && (
+              <span aria-hidden="true" className="self-center font-ui text-pencil">
+                →
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
 function RuleCard({ rule, copy, locale }: { rule: Rule; copy: Copy; locale: Locale }) {
   return (
     <article id={rule.id} className="baris scroll-mt-24 py-4">
@@ -71,6 +121,84 @@ function RuleCard({ rule, copy, locale }: { rule: Rule; copy: Copy; locale: Loca
   )
 }
 
+/**
+ * The forbidden prefix–suffix table — genuinely two-dimensional data
+ * (`pack.forbidden` is keyed by prefix type, each with several forbidden
+ * suffixes), rendered as an actual `<table>` instead of a `<ul>` of
+ * sentences — DESIGN-REWORK.md §3. `.tabel-responsif` (globals.css) reflows
+ * it to stacked rows on narrow viewports, each cell still labelled by its
+ * column via `data-th`.
+ */
+function ForbiddenTable({ pack, locale }: { pack: RulePack; locale: Locale }) {
+  if (pack.forbidden.length === 0) return null
+
+  const akhiranColumns = [...new Set(pack.forbidden.flatMap((entry) => entry.akhiran))].sort()
+
+  return (
+    <section>
+      <h2 className="border-b border-pen pb-1 font-ui text-sm">
+        {locale === 'en'
+          ? 'Forbidden prefix–suffix combinations'
+          : 'Kombinasi awalan–akhiran yang tidak diizinkan'}
+      </h2>
+      <div className="mt-2 overflow-x-auto">
+        <table className="tabel-responsif w-full border-collapse font-ui text-xs">
+          <caption className="mb-2 text-left text-pencil">
+            {locale === 'en'
+              ? 'Consulted before removing a prefix — PRD §3 step 4. A match means the search stops rather than continues.'
+              : 'Dicek sebelum membuang awalan — PRD §3 langkah 4. Kalau cocok, pencarian berhenti, bukan dilanjutkan.'}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" className="border-b border-pen p-2 text-left font-ui font-normal text-pencil">
+                {locale === 'en' ? 'prefix ↓ / suffix →' : 'awalan ↓ / akhiran →'}
+              </th>
+              {akhiranColumns.map((akhiran) => (
+                <th key={akhiran} scope="col" className="border-b border-pen p-2 text-left font-word">
+                  {akhiran}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {pack.forbidden.map((entry) => (
+              <tr key={entry.jenis}>
+                <th scope="row" className="baris p-2 text-left font-word text-pen">
+                  {entry.jenis}-
+                </th>
+                {akhiranColumns.map((akhiran) => {
+                  const forbidden = entry.akhiran.includes(akhiran)
+                  return (
+                    <td key={akhiran} data-th={akhiran} className="baris p-2 align-top">
+                      {forbidden ? (
+                        <span>
+                          {entry.keterangan}{' '}
+                          <span className="text-pencil">
+                            ({entry.citation.source} — {entry.citation.locus})
+                          </span>
+                          {entry.verification === 'unverified' && (
+                            <span className="ml-1 text-pencil" title={locale === 'en' ? 'unverified' : 'belum diperiksa'}>
+                              ⚠
+                            </span>
+                          )}
+                        </span>
+                      ) : (
+                        <span className="text-pencil" aria-hidden="true">
+                          —
+                        </span>
+                      )}
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
 export function RuleReference({
   pack,
   copy,
@@ -106,10 +234,10 @@ export function RuleReference({
         )}
       </header>
 
+      <Pipeline pack={pack} locale={locale} />
+
       {GROUPS.map((group) => {
-        const rules = pack.rules
-          .filter((rule) => rule.type === group.type)
-          .sort((a, b) => a.precedence - b.precedence)
+        const rules = rulesOfGroup(pack, group.type)
         if (rules.length === 0) return null
         return (
           <section key={group.type}>
@@ -123,29 +251,7 @@ export function RuleReference({
         )
       })}
 
-      <section>
-        <h2 className="border-b border-pen pb-1 font-ui text-sm">
-          {locale === 'en'
-            ? 'Forbidden prefix–suffix combinations'
-            : 'Kombinasi awalan–akhiran yang tidak diizinkan'}
-        </h2>
-        <ul>
-          {pack.forbidden.map((entry) => (
-            <li key={entry.jenis} className="baris flex flex-wrap gap-x-3 py-2 font-ui text-xs">
-              <span className="font-word text-sm text-pen">
-                {entry.jenis}- … {entry.akhiran.join(', ')}
-              </span>
-              <span>{entry.keterangan}</span>
-              <span className="text-pencil">
-                {entry.citation.source} — {entry.citation.locus}
-              </span>
-              {entry.verification === 'unverified' && (
-                <span className="text-pencil">⚠ {locale === 'en' ? 'unverified' : 'belum diperiksa'}</span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
+      <ForbiddenTable pack={pack} locale={locale} />
 
       <section className="max-w-2xl font-ui text-xs leading-relaxed text-pencil">
         <h2 className="font-ui text-sm text-pen">

@@ -99,6 +99,30 @@
   .istilah {
     @apply cursor-help underline decoration-pencilMark decoration-dotted underline-offset-4;
   }
+
+  /* A genuinely two-dimensional table (the forbidden prefix–suffix
+     combinations) reflowed to one stacked row per record on a narrow
+     screen — DESIGN-REWORK.md §3. The header row hides visually (it is
+     redundant once labels move onto each cell) but stays for a screen
+     reader, since the underlying <table> markup does not change. */
+  @media (max-width: 640px) {
+    .tabel-responsif thead {
+      @apply sr-only;
+    }
+    .tabel-responsif tbody tr {
+      @apply block border-b border-ruleLine py-2;
+    }
+    .tabel-responsif tbody th[scope='row'] {
+      @apply block border-b-0 p-0 pb-1;
+    }
+    .tabel-responsif tbody td {
+      @apply block border-b-0 p-0 py-1;
+    }
+    .tabel-responsif tbody td::before {
+      content: attr(data-th) ': ';
+      @apply font-ui text-pencil;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

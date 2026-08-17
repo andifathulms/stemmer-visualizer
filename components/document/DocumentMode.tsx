@@ -49,8 +49,15 @@ export function DocumentMode({ copy, locale }: { copy: Copy; locale: Locale }) {
     }
   }, [text, pack, dictionary])
 
-  const ambiguous = rows.items.filter((row) => row.candidates.length > 1).length
-  const missed = rows.items.filter((row) => !row.found).length
+  // Grouped by outcome rather than left flat with colour badges — the reader
+  // is scanning for the interesting cases in a mass of ordinary ones, and a
+  // position in the page is a stronger cue than a colour is. Ambiguous first
+  // even when a word is also unmatched: DESIGN-REWORK.md §3, and the more
+  // actionable fact about a word that is both is that it has several
+  // dictionary-valid readings the algorithm never reached.
+  const ambiguousRows = rows.items.filter((row) => row.candidates.length > 1)
+  const unmatchedRows = rows.items.filter((row) => !row.found && row.candidates.length <= 1)
+  const resolvedRows = rows.items.filter((row) => row.found && row.candidates.length <= 1)
 
   return (
     <div className="space-y-6">
@@ -67,10 +74,7 @@ export function DocumentMode({ copy, locale }: { copy: Copy; locale: Locale }) {
 
       <p className="font-ui text-xs text-pencil">
         {rows.total} {locale === 'en' ? 'tokens' : 'token'} · {rows.items.length}{' '}
-        {locale === 'en' ? 'unique' : 'unik'} ·{' '}
-        <span className="text-teacher">{ambiguous}</span>{' '}
-        {locale === 'en' ? 'with several candidates' : 'punya lebih dari satu kandidat'} ·{' '}
-        {missed} {locale === 'en' ? 'not matched' : 'tidak ketemu'}
+        {locale === 'en' ? 'unique' : 'unik'}
         {rows.truncated && (
           <>
             {' '}
@@ -84,8 +88,77 @@ export function DocumentMode({ copy, locale }: { copy: Copy; locale: Locale }) {
         )}
       </p>
 
-      <ul className="grid gap-px border-t border-ruleLine sm:grid-cols-2">
-        {rows.items.map((row) => (
+      <DocumentGroup
+        title={locale === 'en' ? 'Several candidates' : 'Punya lebih dari satu kandidat'}
+        hint={
+          locale === 'en'
+            ? 'The algorithm chose one; these words have another dictionary-valid reading it did not.'
+            : 'Algoritma memilih satu; kata-kata ini punya bacaan lain yang sama sahnya menurut kamus.'
+        }
+        accent="teacher"
+        rows={ambiguousRows}
+        locale={locale}
+        setKata={setKata}
+      />
+      <DocumentGroup
+        title={locale === 'en' ? 'Not matched' : 'Tidak ketemu'}
+        hint={
+          locale === 'en'
+            ? 'No rule and dictionary combination reached a root; the word is returned unchanged.'
+            : 'Tidak ada kombinasi aturan dan kamus yang sampai ke kata dasar; kata dikembalikan apa adanya.'
+        }
+        accent="pencil"
+        rows={unmatchedRows}
+        locale={locale}
+        setKata={setKata}
+      />
+      <DocumentGroup
+        title={locale === 'en' ? 'Resolved' : 'Selesai'}
+        hint={null}
+        accent="pen"
+        rows={resolvedRows}
+        locale={locale}
+        setKata={setKata}
+      />
+    </div>
+  )
+}
+
+interface DocumentRow {
+  readonly kata: string
+  readonly hasil: string
+  readonly found: boolean
+  readonly candidates: readonly string[]
+}
+
+/** One outcome group — DESIGN-REWORK.md §3: position in the page carries the
+ *  scan, not colour. Empty groups collapse rather than showing "(0)". */
+function DocumentGroup({
+  title,
+  hint,
+  accent,
+  rows,
+  locale,
+  setKata,
+}: {
+  title: string
+  hint: string | null
+  accent: 'teacher' | 'pencil' | 'pen'
+  rows: readonly DocumentRow[]
+  locale: Locale
+  setKata: (kata: string) => void
+}) {
+  if (rows.length === 0) return null
+  const accentClass = accent === 'teacher' ? 'text-teacher' : accent === 'pencil' ? 'text-pencil' : 'text-pen'
+
+  return (
+    <section>
+      <h2 className={`font-ui text-sm ${accentClass}`}>
+        {title} <span className="font-word font-normal">({rows.length})</span>
+      </h2>
+      {hint && <p className="mt-0.5 max-w-baca font-ui text-xs text-pencil">{hint}</p>}
+      <ul className="mt-2 grid gap-px border-t border-ruleLine sm:grid-cols-2">
+        {rows.map((row) => (
           <li key={row.kata} className="baris flex items-baseline justify-between gap-3 py-1.5">
             <button
               className="font-word text-sm underline decoration-ruleLine hover:text-pen"
@@ -95,22 +168,12 @@ export function DocumentMode({ copy, locale }: { copy: Copy; locale: Locale }) {
               {row.kata}
             </button>
             <span className="flex items-baseline gap-2 text-right font-word text-sm">
-              {row.found ? (
-                <span>{row.hasil}</span>
-              ) : (
-                <span className="text-pencil">
-                  {row.hasil}{' '}
-                  <span className="font-ui text-xs">
-                    {locale === 'en' ? '(no match)' : '(tak ketemu)'}
-                  </span>
-                </span>
-              )}
+              <span className={row.found ? '' : 'text-pencil'}>{row.hasil}</span>
               {row.candidates.length > 1 && (
-                // Red for genuine ambiguity, and for nothing else here.
-                <span
-                  className="font-ui text-xs text-teacher"
-                  title={row.candidates.join(', ')}
-                >
+                // Red for genuine ambiguity, and for nothing else here — this
+                // group's heading already carries the scan; the badge is a
+                // second, redundant cue, not the only one.
+                <span className="font-ui text-xs text-teacher" title={row.candidates.join(', ')}>
                   {row.candidates.length} {locale === 'en' ? 'readings' : 'bacaan'}
                 </span>
               )}
@@ -118,6 +181,6 @@ export function DocumentMode({ copy, locale }: { copy: Copy; locale: Locale }) {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   )
 }
